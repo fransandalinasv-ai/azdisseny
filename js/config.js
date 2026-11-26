@@ -11,7 +11,7 @@ window.AZ_CONFIG = {
 
   heroSlides: [
     { src: 'assets/images/slides/design-lamp.webp', alt: 'AZdisseny Parametric Lighting Design' },
-    { src: 'assets/images/design/naval-interceptor.png', alt: 'High-Speed Naval Electromechanical Architecture' },
+    { src: 'assets/images/design/naval-vessel-nda.jpg', alt: 'High-Speed Naval Electromechanical Architecture (Representative Visual · Under NDA)' },
     { src: 'assets/images/design/heater-exploded.png', alt: 'Smart Heater Exploded CAD Assembly' },
     { src: 'assets/images/software/prometeos-organigrama.png', alt: 'prometeOS Multi-Agent AI Architecture' }
   ],
@@ -148,20 +148,21 @@ window.AZ_CONFIG = {
         {
           id: 'naval',
           title: 'Naval Electromechanical Systems',
-          meta: 'MASS PRODUCTION · +60 VESSELS',
-          summary: 'End-to-end electromechanical design, supplier management and series production for 60+ high-speed vessels.',
-          cover: 'assets/images/design/naval-interceptor.png',
+          meta: 'MASS PRODUCTION · +60 VESSELS · UNDER NDA',
+          summary: 'Interior electromechanical systems, marine 5083 sheet metal, supplier management and series production for 60+ vessels. Representative visuals (originals protected under NDA).',
+          cover: 'assets/images/design/naval-vessel-nda.jpg',
           gallery: [
-            'assets/images/design/naval-interceptor.png',
-            'assets/images/design/mass-prod-02.png',
-            'assets/images/design/mass-prod-03.png'
+            'assets/images/design/naval-vessel-nda.jpg',
+            'assets/images/design/naval-bridge-nda.jpg',
+            'assets/images/design/naval-electronics-rack-nda.jpg',
+            'assets/images/design/naval-sheetmetal-5083-nda.jpg'
           ],
-          description: 'Complete lifecycle leadership from 3D CAD and engineering change requests to supplier negotiation (5083 marine sheet metal, CNC machining, laser cutting) and shop-floor quality control across more than 60 high-speed patrol vessels and over 600 integrated components.',
-          tags: ['SolidWorks', 'Siemens NX', 'Sheet Metal', 'CNC & Laser', 'Mass Production', 'Supplier Leadership'],
+          description: 'Complete lifecycle leadership for interior electromechanical systems, consoles, electronics racks and marine 5083 sheet-metal assemblies — from 3D CAD and engineering change requests to supplier negotiation (CNC machining, laser cutting, TIG welding) and shop-floor quality control across 60+ high-speed vessels and 600+ components. Note: Representative visuals — original vessel photographs and CAD drawings are protected under NDA.',
+          tags: ['SolidWorks', 'Siemens NX', '5083 Sheet Metal', 'CNC & Laser', 'Mass Production', 'Under NDA'],
           highlights: [
-            { title: 'Series Scale', text: 'Electromechanical systems engineered and produced for 60+ vessels and 600+ components.' },
-            { title: 'Supply Chain', text: 'Direct negotiation and quality control with external CNC, laser cutting and sheet metal fabricators.' },
-            { title: 'Engineering & Production', text: 'Technical drawing review, BOM & cost estimation, and shop-floor supervision.' }
+            { title: 'Series Scale', text: 'Interior electromechanical systems engineered and produced for 60+ vessels and 600+ components.' },
+            { title: 'Supply Chain', text: 'Direct negotiation and quality control with external CNC, laser cutting and marine sheet-metal fabricators.' },
+            { title: 'Confidentiality (NDA)', text: 'Representative visuals recreated to illustrate scope — original hardware, CAD files and client identity are protected under NDA.' }
           ]
         },
         {
@@ -430,20 +431,21 @@ window.AZ_CONFIG = {
         {
           id: 'naval',
           title: 'Sistemas Electromecánicos Navales',
-          meta: 'PRODUCCIÓN EN MASA · +60 BARCOS',
-          summary: 'Diseño electromecánico integral, negociación con proveedores y producción en serie para más de 60 embarcaciones.',
-          cover: 'assets/images/design/naval-interceptor.png',
+          meta: 'PRODUCCIÓN EN SERIE · +60 BARCOS · BAJO NDA',
+          summary: 'Sistemas electromecánicos interiores, chapistería marina 5083, gestión de proveedores y producción en serie para +60 barcos. Imágenes representativas (reales protegidas por NDA).',
+          cover: 'assets/images/design/naval-vessel-nda.jpg',
           gallery: [
-            'assets/images/design/naval-interceptor.png',
-            'assets/images/design/mass-prod-02.png',
-            'assets/images/design/mass-prod-03.png'
+            'assets/images/design/naval-vessel-nda.jpg',
+            'assets/images/design/naval-bridge-nda.jpg',
+            'assets/images/design/naval-electronics-rack-nda.jpg',
+            'assets/images/design/naval-sheetmetal-5083-nda.jpg'
           ],
-          description: 'Dirección del ciclo de vida completo desde el modelado CAD 3D y cambios de ingeniería hasta la negociación con proveedores (chapa naval 5083, mecanizado CNC, corte láser) y control de calidad en taller para más de 60 embarcaciones y más de 600 componentes.',
-          tags: ['SolidWorks', 'Siemens NX', 'Chapa Metálica', 'CNC y Láser', 'Producción en Serie', 'Proveedores'],
+          description: 'Dirección del ciclo de vida completo de sistemas electromecánicos interiores, consolas, bastidores de electrónica y conjuntos en chapa marina 5083 — desde el modelado CAD 3D y cambios de ingeniería hasta la negociación con proveedores (mecanizado CNC, corte láser, soldadura TIG) y control de calidad en taller para más de 60 embarcaciones y más de 600 componentes. Nota: Imágenes representativas — las fotografías y planos reales están protegidos bajo contrato de confidencialidad (NDA).',
+          tags: ['SolidWorks', 'Siemens NX', 'Chapa Marina 5083', 'CNC y Láser', 'Producción en Serie', 'Bajo NDA'],
           highlights: [
-            { title: 'Escala en Serie', text: 'Sistemas electromecánicos diseñados y producidos para más de 60 barcos y más de 600 componentes.' },
-            { title: 'Cadena de Suministro', text: 'Negociación directa y control de calidad con talleres externos de CNC, corte láser y chapa.' },
-            { title: 'Ingeniería y Taller', text: 'Revisión de planos, estimación de costes y supervisión directa en producción.' }
+            { title: 'Escala en Serie', text: 'Sistemas electromecánicos interiores diseñados y producidos para más de 60 barcos y más de 600 componentes.' },
+            { title: 'Cadena de Suministro', text: 'Negociación directa y control de calidad con talleres externos de CNC, corte láser y chapistería marina.' },
+            { title: 'Confidencialidad (NDA)', text: 'Imágenes representativas recreadas para ilustrar el alcance: las fotografías reales, planos CAD e identidad del cliente están protegidos por NDA.' }
           ]
         },
         {
