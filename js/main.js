@@ -167,9 +167,10 @@
      PROJECT GRIDS (Hardware + Software/AI)
   ------------------------------------------------------- */
   function projectCardHTML(p, delayIdx) {
+    const posStyle = p.coverPosition ? ` style="object-position:${p.coverPosition}"` : '';
     return `
       <button type="button" class="project-card reveal" style="transition-delay:${delayIdx * 70}ms" data-open-project="${p.id}">
-        <img class="project-card__img" src="${p.cover}" alt="${p.title}" loading="lazy">
+        <img class="project-card__img" src="${p.cover}" alt="${p.title}" loading="lazy"${posStyle}>
         <div class="project-card__scrim"></div>
         <div class="project-card__top">
           <div>
@@ -276,6 +277,11 @@
     const proj = all.find((p) => p.id === projectId);
     if (!proj) return;
 
+    const galleryClasses = ['proj-modal__gallery'];
+    if (proj.galleryLayout === 'portrait') galleryClasses.push('proj-modal__gallery--portrait');
+    if (proj.galleryLayout === 'landscape') galleryClasses.push('proj-modal__gallery--landscape');
+    if (proj.gallery.length === 1) galleryClasses.push('proj-modal__gallery--single');
+
     const body = document.getElementById('project-modal-body');
     body.innerHTML = `
       <div class="proj-modal__header">
@@ -287,8 +293,8 @@
         </div>
       </div>
 
-      <div class="proj-modal__gallery">
-        ${proj.gallery.map((src) => `<img src="${src}" alt="${proj.title}" loading="lazy">`).join('')}
+      <div class="${galleryClasses.join(' ')}">
+        ${proj.gallery.map((src) => `<button type="button" class="gallery-item" data-zoom-img="${src}" aria-label="${proj.title}"><img src="${src}" alt="${proj.title}" loading="lazy"></button>`).join('')}
       </div>
 
       <div class="proj-modal__highlights">
@@ -466,11 +472,49 @@
     const closeBtn = e.target.closest('[data-close-modal]');
     if (closeBtn) {
       closeModal(closeBtn.dataset.closeModal);
+      return;
+    }
+
+    const zoomBtn = e.target.closest('[data-zoom-img]');
+    if (zoomBtn) {
+      openLightbox(zoomBtn.dataset.zoomImg, zoomBtn.getAttribute('aria-label') || '');
     }
   });
 
+  function openLightbox(src, alt) {
+    let box = document.getElementById('img-lightbox');
+    if (!box) {
+      box = document.createElement('div');
+      box.id = 'img-lightbox';
+      box.className = 'img-lightbox';
+      box.setAttribute('role', 'dialog');
+      box.setAttribute('aria-modal', 'true');
+      box.innerHTML = `
+        <button type="button" class="img-lightbox__close" aria-label="Close">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <img class="img-lightbox__img" src="" alt="">
+      `;
+      box.addEventListener('click', (ev) => {
+        if (ev.target === box || ev.target.closest('.img-lightbox__close')) {
+          box.classList.remove('is-open');
+        }
+      });
+      document.body.appendChild(box);
+    }
+    const img = box.querySelector('.img-lightbox__img');
+    img.src = src;
+    img.alt = alt;
+    box.classList.add('is-open');
+  }
+
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
+      const box = document.getElementById('img-lightbox');
+      if (box && box.classList.contains('is-open')) {
+        box.classList.remove('is-open');
+        return;
+      }
       document.querySelectorAll('.modal:not(.hidden)').forEach((m) => closeModal(m.id));
     }
   });

@@ -85,9 +85,9 @@ window.AZ_CONFIG = {
         desc: 'Selected mechanical engineering, mass production leadership, biomaterial R&D and parametric lighting.'
       },
       lab: {
-        eyebrow: '03 / SOFTWARE, APPS & APPLIED AI',
-        title: 'Digital Products & AI Architecture.',
-        desc: 'In-house apps and AI systems designed, engineered and shipped across iOS, Android and desktop.'
+        eyebrow: '03 / SOFTWARE, APPS AND APPLIED AI',
+        title: 'Digital Products and AI Systems.',
+        desc: 'In-house mobile apps and AI tools designed to solve real everyday problems with clarity and craft.'
       },
       process: {
         eyebrow: '04 / HOW WE WORK',
@@ -120,7 +120,7 @@ window.AZ_CONFIG = {
       },
       modal: {
         buildSimilar: 'Build something similar',
-        specsLabel: 'STACK & DISCIPLINES',
+        specsLabel: 'AZDISSENY · PRODUCT STUDIO',
         contactTitle: 'Tell us about your project.',
         contactSub: 'Whether it is a physical product, a mass production run or a software app, share the basics and we will get back to you.',
         name: 'Name or Company',
@@ -222,90 +222,102 @@ window.AZ_CONFIG = {
         {
           id: 'prometeos',
           title: 'prometeOS',
-          meta: 'APPLIED AI · AGENT HARNESS',
-          summary: 'AI execution harness that structures multi-department workflows and reduces RAM footprint.',
+          meta: 'APPLIED AI · OPERATIONS OS',
+          summary: 'AI operating system that organizes multi-department work, keeps every project under control, and runs light on your machine.',
           cover: 'assets/images/software/prometeos-organigrama.png',
+          galleryLayout: 'landscape',
           gallery: [
             'assets/images/software/prometeos-organigrama.png',
             'assets/images/software/prometeos-cadena.png',
             'assets/images/software/prometeos-panel.png'
           ],
-          description: 'Custom AI operating harness designed to govern multi-agent workflows, enforce strict route/permission policies, and keep local project state lightweight and structured.',
-          tags: ['Applied AI', 'Python', 'Multi-Agent Systems', 'Governance Harness', 'UI Dashboard'],
+          description: 'Turns scattered AI chats into a structured studio workflow. Every project keeps a single source of truth, clear permissions and specialized roles so complex work moves faster without losing control.',
+          tags: ['Applied AI', 'Workflow Automation', 'Project Governance', 'Multi-Department', 'Desktop Control'],
           highlights: [
-            { title: 'Structured Execution', text: 'Clear separation between strategy, project state, and specialized agents.' },
-            { title: 'Efficiency', text: 'Engineered to minimize context bloat and local resource overhead.' }
+            { title: 'Zero Chaos', text: 'Separates strategy, live project state and specialist execution so nothing gets lost.' },
+            { title: 'Fast and Lightweight', text: 'Built to keep sessions focused and avoid bloated context or heavy local resource use.' }
           ]
         },
         {
           id: 'medixi',
-          title: 'Medixi',
-          meta: 'MOBILE APP · COMMUNITY & MAP',
-          summary: 'Location-based community app connecting remote workers across curated cafés and workspaces.',
+          title: 'mediXI',
+          meta: 'PRIVATE BETA · BARCELONA',
+          summary: 'An invite-only urban map for discovering inspiring workspaces and meeting the right people in the real world.',
           cover: 'assets/images/software/medixi-shot-01.png',
+          coverPosition: 'center 72%',
+          galleryLayout: 'portrait',
           gallery: [
-            'assets/images/software/medixi-shot-01.png',
-            'assets/images/software/medixi-shot-02.png',
-            'assets/images/software/medixi-shot-03.png'
+            'assets/images/software/medixi-shot-01.png'
           ],
-          description: 'Mobile application engineered with Flutter and Supabase featuring real-time maps, curated café/workspace discovery, check-ins and community chat.',
-          tags: ['Flutter', 'Dart', 'Supabase', 'Maps & Geo', 'UX/UI Design'],
+          description: 'Currently in closed beta in Barcelona. Designed to turn everyday solo work into meaningful in-person encounters across curated spaces — without noise, feeds or public exposure.',
+          tags: ['Private Beta', 'Barcelona', 'Curated Spaces', 'Real-World Community'],
           highlights: [
-            { title: 'Real-Time Backend', text: 'Supabase database with live place updates without app store re-releases.' },
-            { title: 'Mobile Experience', text: 'Map-first interface designed for fast discovery and local networking.' }
+            { title: 'Quiet by Design', text: 'Curated places and intentional offline connections, away from noisy social networks.' },
+            { title: 'Closed Access', text: 'Rolling out privately in Barcelona before opening to the public.' }
           ]
         },
         {
           id: 'matinium',
           title: 'Matinium',
-          meta: 'IOS & ANDROID · WELLNESS',
-          summary: 'Circadian morning & evening ritual app with a guided 12-week program and local-first privacy.',
-          cover: 'assets/images/software/matinium-shot-01.png',
+          meta: 'DAILY RITUAL · WELLNESS',
+          summary: 'Start your morning with clarity and close your night in silence — a calm daily ritual app free of streaks and noise.',
+          cover: 'assets/images/software/matinium-cover.png',
+          coverPosition: 'center center',
+          galleryLayout: 'landscape',
           gallery: [
-            'assets/images/software/matinium-shot-01.png',
-            'assets/images/software/matinium-shot-02.png',
-            'assets/images/software/matinium-shot-03.png',
-            'assets/images/software/matinium-shot-04.png'
+            'assets/images/software/matinium-hero.png',
+            'assets/images/software/matinium-slide-01.png',
+            'assets/images/software/matinium-slide-02.png',
+            'assets/images/software/matinium-slide-03.png'
           ],
-          description: 'Minimalist offline-first mobile app pairing an analog morning writing ritual with a live circadian interface and calm evening reflection — zero streaks or manipulative notifications.',
-          tags: ['Flutter', 'iOS TestFlight', 'Android', 'Local-First', 'Product Design'],
+          description: 'Built around circadian rhythm and a 12-week guided creative practice. Matinium pairs screen-free morning writing with three daily priorities and a pure dark evening wind-down so your phone serves your life instead of consuming it.',
+          tags: ['Daily Ritual', '12-Week Guided Journey', 'Circadian Design', '100% Private Offline', 'Zero Notifications'],
           highlights: [
-            { title: 'Calm UI', text: 'Pure OLED dark mode and intentional typography without dopamine traps.' },
-            { title: 'Cross-Platform', text: 'Built and tested on both iOS and Android.' }
+            { title: 'Morning to Night Flow', text: 'Warm dawn interface to lock your 3 daily priorities, fading into pure black at night so you rest.' },
+            { title: 'Zero Dopamine Traps', text: 'No guilt-inducing streaks, no manipulative alerts, and all reflections stay privately on your device.' }
           ]
         },
         {
-          id: 'friction',
-          title: 'Friction',
-          meta: 'IOS APP · FOCUS & DETOX',
-          summary: 'Attention sovereignty app blocker that inserts intentional cognitive friction before opening distracting apps.',
-          cover: 'assets/images/software/friction-shot-01.png',
+          id: 'menir',
+          title: 'Menir',
+          meta: 'FOCUS · APP BLOCKER',
+          summary: 'Break mindless scrolling in seconds — solve three quick mental math challenges before opening distracting apps.',
+          cover: 'assets/images/software/menir-01-dashboard.png',
+          coverPosition: 'center 58%',
+          galleryLayout: 'portrait',
           gallery: [
-            'assets/images/software/friction-shot-01.png',
-            'assets/images/software/friction-shot-02.png',
-            'assets/images/software/friction-shot-03.png'
+            'assets/images/software/menir-01-dashboard.png',
+            'assets/images/software/menir-02-reto.png',
+            'assets/images/software/menir-03-dificultad.png',
+            'assets/images/software/menir-04-apps.png'
           ],
-          description: 'Designed to break compulsive phone habits by requiring quick math challenges before unlocking selected apps, restoring conscious choice.',
-          tags: ['iOS TestFlight', 'Behavioral Design', 'Mobile Engineering', 'Focus'],
+          description: 'Reclaim your attention without rigid lockouts. Whenever you reach for Instagram, TikTok or YouTube on autopilot, Menir inserts a calm, customizable mental pause so you only enter when you truly choose to.',
+          tags: ['App Blocker', 'Attention Control', 'Mental Pause', 'Customizable Difficulty', '100% Private'],
           highlights: [
-            { title: 'Intentional Friction', text: 'Interrupts automatic scrolling loops at the exact moment of impulse.' }
+            { title: 'Stops Autopilot', text: 'Interrupts impulsive app opens at the exact moment of habit and repeats on timed intervals.' },
+            { title: 'Tailored to You', text: 'Pick the apps to guard, operation types, difficulty level and time passes with full daily stats.' }
           ]
         },
         {
           id: 'producty',
           title: 'Producty',
-          meta: 'FLUTTER & SUPABASE · EXECUTION',
-          summary: '6-phase sequential execution pipeline app inspired by industrial assembly lines.',
-          cover: 'assets/images/software/producty-mockup-1.png',
+          meta: 'DEEP FOCUS · EXECUTION',
+          summary: 'Turn overwhelming goals into a 6-step action roadmap, lock into zero-distraction focus blocks and track every real minute.',
+          cover: 'assets/images/software/producty-01-bunker.png',
+          coverPosition: 'center 88%',
+          galleryLayout: 'portrait',
           gallery: [
-            'assets/images/software/producty-mockup-1.png',
-            'assets/images/software/producty-shot-01.png',
-            'assets/images/software/producty-shot-02.png'
+            'assets/images/software/producty-01-bunker.png',
+            'assets/images/software/producty-02-desglose.png',
+            'assets/images/software/producty-03-compromiso.png',
+            'assets/images/software/producty-04-tiempo.png',
+            'assets/images/software/producty-05-marcaje.png'
           ],
-          description: 'Breaks complex goals into a structured 6-phase sequential pipeline, limiting work in progress and tracking real time invested per task.',
-          tags: ['Flutter', 'Supabase RLS', 'Python Analytics', 'Google Play Testing'],
+          description: 'Built to end planning paralysis. Producty breaks big goals into six concrete executable phases, puts you inside an unbreakable distraction-free focus session and measures the real hours invested in every project.',
+          tags: ['6-Phase Roadmap', 'Hyper-Focus Mode', 'Time Telemetry', 'Goal Execution', 'Zero Distractions'],
           highlights: [
-            { title: 'Industrial Logic', text: 'Applies assembly-line sequencing to eliminate planning paralysis.' }
+            { title: 'Clear 6-Step Action Plan', text: 'Breaks any ambitious goal into sequential, bite-sized phases with time estimates.' },
+            { title: 'Real Time Visibility', text: 'Tracks actual hours invested per project so you know exactly where your focus goes.' }
           ]
         }
       ]
@@ -369,8 +381,8 @@ window.AZ_CONFIG = {
       },
       lab: {
         eyebrow: '03 / SOFTWARE, APPS E IA APLICADA',
-        title: 'Productos Digitales y Arquitectura de IA.',
-        desc: 'Aplicaciones móviles y sistemas de IA diseñados y desarrollados para iOS, Android y escritorio.'
+        title: 'Productos Digitales y Sistemas de IA.',
+        desc: 'Aplicaciones móviles propias y herramientas de IA diseñadas para resolver problemas reales con claridad y criterio.'
       },
       process: {
         eyebrow: '04 / CÓMO TRABAJAMOS',
@@ -403,7 +415,7 @@ window.AZ_CONFIG = {
       },
       modal: {
         buildSimilar: 'Crear algo similar',
-        specsLabel: 'STACK Y DISCIPLINAS',
+        specsLabel: 'AZDISSENY · ESTUDIO DE PRODUCTO',
         contactTitle: 'Cuéntanos tu proyecto.',
         contactSub: 'Tanto si es un producto físico, una tirada de producción en masa o una app, cuéntanos la base y te respondemos en breve.',
         name: 'Nombre o Empresa',
@@ -505,90 +517,102 @@ window.AZ_CONFIG = {
         {
           id: 'prometeos',
           title: 'prometeOS',
-          meta: 'IA APLICADA · ARQUITECTURA',
-          summary: 'Arnés de ejecución con IA que estructura proyectos multi-departamento y reduce el consumo de RAM.',
+          meta: 'IA APLICADA · SISTEMA OPERATIVO',
+          summary: 'Sistema operativo de IA que ordena el trabajo entre departamentos, mantiene cada proyecto bajo control y funciona ligero en local.',
           cover: 'assets/images/software/prometeos-organigrama.png',
+          galleryLayout: 'landscape',
           gallery: [
             'assets/images/software/prometeos-organigrama.png',
             'assets/images/software/prometeos-cadena.png',
             'assets/images/software/prometeos-panel.png'
           ],
-          description: 'Sistema propio de orquestación y gobernanza de agentes de IA que aplica reglas de permisos y rutas, manteniendo el estado de cada proyecto ligero y trazable.',
-          tags: ['IA Aplicada', 'Python', 'Sistemas Multi-Agente', 'Gobernanza', 'Interfaz Web'],
+          description: 'Convierte chats dispersos de IA en una operativa estructurada de estudio. Cada proyecto mantiene una única fuente de verdad, permisos claros y roles especializados para avanzar más rápido sin perder control.',
+          tags: ['IA Aplicada', 'Automatización', 'Control de Proyectos', 'Multi-Departamento', 'Operativa Real'],
           highlights: [
-            { title: 'Ejecución Estructurada', text: 'Separación clara entre estrategia, estado del proyecto y agentes especialistas.' },
-            { title: 'Eficiencia', text: 'Diseñado para evitar saturación de contexto y reducir uso de recursos locales.' }
+            { title: 'Cero Caos', text: 'Separa estrategia, estado real del proyecto y ejecución especializada para que nada se pierda.' },
+            { title: 'Rápido y Ligero', text: 'Diseñado para sesiones enfocadas sin saturar el contexto ni sobrecargar el equipo.' }
           ]
         },
         {
           id: 'medixi',
-          title: 'Medixi',
-          meta: 'APP MÓVIL · COMUNIDAD Y MAPA',
-          summary: 'App geolocalizada que conecta a personas que trabajan en remoto desde cafeterías y espacios seleccionados.',
+          title: 'mediXI',
+          meta: 'BETA PRIVADA · BARCELONA',
+          summary: 'Mapa urbano privado para descubrir espacios con criterio y conectar con personas afines en el mundo real.',
           cover: 'assets/images/software/medixi-shot-01.png',
+          coverPosition: 'center 72%',
+          galleryLayout: 'portrait',
           gallery: [
-            'assets/images/software/medixi-shot-01.png',
-            'assets/images/software/medixi-shot-02.png',
-            'assets/images/software/medixi-shot-03.png'
+            'assets/images/software/medixi-shot-01.png'
           ],
-          description: 'Aplicación móvil desarrollada en Flutter y Supabase con mapa en tiempo real, descubrimiento de locales, check-ins y chat comunitario.',
-          tags: ['Flutter', 'Dart', 'Supabase', 'Mapas y Geo', 'Diseño UX/UI'],
+          description: 'Actualmente en fase privada en Barcelona. Pensada para transformar el trabajo en solitario en encuentros presenciales auténticos en espacios seleccionados — sin ruido, sin algoritmos ni exposición pública.',
+          tags: ['Beta Privada', 'Barcelona', 'Espacios Seleccionados', 'Comunidad Real'],
           highlights: [
-            { title: 'Backend en Tiempo Real', text: 'Base de datos en Supabase con gestión en caliente de locales sin republicar la app.' },
-            { title: 'Experiencia Móvil', text: 'Interfaz centrada en mapa pensada para conectar rápido en tu zona.' }
+            { title: 'Discreta por Diseño', text: 'Lugares seleccionados y conexiones presenciales con intención, lejos del ruido de las redes.' },
+            { title: 'Acceso Cerrado', text: 'Despliegue privado en Barcelona antes de su apertura pública.' }
           ]
         },
         {
           id: 'matinium',
           title: 'Matinium',
-          meta: 'IOS Y ANDROID · BIENESTAR',
-          summary: 'App de rituales circadianos de mañana y noche con programa guiado de 12 semanas y privacidad local-first.',
-          cover: 'assets/images/software/matinium-shot-01.png',
+          meta: 'RITUAL DIARIO · BIENESTAR',
+          summary: 'Empieza el día con claridad y ciérralo en silencio — una app serena de hábitos diarios sin rachas ni ruido.',
+          cover: 'assets/images/software/matinium-cover.png',
+          coverPosition: 'center center',
+          galleryLayout: 'landscape',
           gallery: [
-            'assets/images/software/matinium-shot-01.png',
-            'assets/images/software/matinium-shot-02.png',
-            'assets/images/software/matinium-shot-03.png',
-            'assets/images/software/matinium-shot-04.png'
+            'assets/images/software/matinium-hero.png',
+            'assets/images/software/matinium-slide-01.png',
+            'assets/images/software/matinium-slide-02.png',
+            'assets/images/software/matinium-slide-03.png'
           ],
-          description: 'App minimalista offline-first que combina escritura matutina analógica con una interfaz circadiana serena y cierre nocturno — sin rachas ni notificaciones invasivas.',
-          tags: ['Flutter', 'iOS TestFlight', 'Android', 'Local-First', 'Diseño de Producto'],
+          description: 'Diseñada al ritmo circadiano junto a un recorrido guiado de 12 semanas. Matinium combina escritura matutina sin pantalla, tres prioridades claras al día y un cierre nocturno en negro puro para que el móvil sirva a tu vida y no la consuma.',
+          tags: ['Ritual Diario', 'Guía de 12 Semanas', 'Diseño Circadiano', '100% Privada Offline', 'Sin Notificaciones'],
           highlights: [
-            { title: 'Interfaz Serena', text: 'Modo oscuro OLED puro y tipografía cuidada sin trampas de dopamina.' },
-            { title: 'Multiplataforma', text: 'Desarrollada y probada en iOS y Android.' }
+            { title: 'Del Amanecer al Descanso', text: 'Interfaz cálida al despertar para fijar tus 3 prioridades y negro puro por la noche para desconectar.' },
+            { title: 'Sin Trampas de Dopamina', text: 'Sin rachas que generen ansiedad ni alertas invasivas; tus reflexiones nunca salen de tu móvil.' }
           ]
         },
         {
-          id: 'friction',
-          title: 'Friction',
-          meta: 'APP IOS · ENFOQUE',
-          summary: 'Bloqueador de apps que introduce fricción cognitiva intencionada antes de abrir aplicaciones adictivas.',
-          cover: 'assets/images/software/friction-shot-01.png',
+          id: 'menir',
+          title: 'Menir',
+          meta: 'ENFOQUE · BLOQUEADOR DE APPS',
+          summary: 'Frena el scroll automático al instante — resuelve tres micro-retos mentales antes de abrir tus apps más adictivas.',
+          cover: 'assets/images/software/menir-01-dashboard.png',
+          coverPosition: 'center 58%',
+          galleryLayout: 'portrait',
           gallery: [
-            'assets/images/software/friction-shot-01.png',
-            'assets/images/software/friction-shot-02.png',
-            'assets/images/software/friction-shot-03.png'
+            'assets/images/software/menir-01-dashboard.png',
+            'assets/images/software/menir-02-reto.png',
+            'assets/images/software/menir-03-dificultad.png',
+            'assets/images/software/menir-04-apps.png'
           ],
-          description: 'Diseñada para romper el uso compulsivo del móvil exigiendo pequeños retos matemáticos antes de abrir apps seleccionadas.',
-          tags: ['iOS TestFlight', 'Diseño Conductual', 'Desarrollo Móvil', 'Enfoque'],
+          description: 'Recupera el control de tu atención sin bloqueos extremos. Cada vez que abres Instagram, TikTok o YouTube por inercia, Menir introduce una pausa consciente y configurable para que entres solo cuando de verdad lo decides.',
+          tags: ['Bloqueador de Apps', 'Control de Atención', 'Pausa Consciente', 'Dificultad a Medida', '100% Privada'],
           highlights: [
-            { title: 'Fricción Consciente', text: 'Interrumpe el bucle automático justo en el instante del impulso.' }
+            { title: 'Corta el Piloto Automático', text: 'Detiene el impulso en el instante exacto y vuelve a activarse por intervalos si sigues dentro.' },
+            { title: 'A tu Medida', text: 'Elige qué apps proteger, el tipo de cálculo, la dificultad y los tiempos de pase con métricas diarias.' }
           ]
         },
         {
           id: 'producty',
           title: 'Producty',
-          meta: 'FLUTTER Y SUPABASE · EJECUCIÓN',
-          summary: 'App que desglosa objetivos en un pipeline secuencial de 6 fases inspirado en líneas de montaje industriales.',
-          cover: 'assets/images/software/producty-mockup-1.png',
+          meta: 'ENFOQUE PROFUNDO · EJECUCIÓN',
+          summary: 'Convierte grandes objetivos en 6 fases ejecutables, bloquea distracciones en modo enfoque y mide cada minuto real.',
+          cover: 'assets/images/software/producty-01-bunker.png',
+          coverPosition: 'center 88%',
+          galleryLayout: 'portrait',
           gallery: [
-            'assets/images/software/producty-mockup-1.png',
-            'assets/images/software/producty-shot-01.png',
-            'assets/images/software/producty-shot-02.png'
+            'assets/images/software/producty-01-bunker.png',
+            'assets/images/software/producty-02-desglose.png',
+            'assets/images/software/producty-03-compromiso.png',
+            'assets/images/software/producty-04-tiempo.png',
+            'assets/images/software/producty-05-marcaje.png'
           ],
-          description: 'Combate la parálisis por sobre-planificación limitando el trabajo en curso y registrando el tiempo real dedicado a cada fase.',
-          tags: ['Flutter', 'Supabase RLS', 'Analítica Python', 'Google Play Testing'],
+          description: 'Creada para acabar con la parálisis por análisis. Producty divide cualquier proyecto en seis fases claras con estimación de tiempo, te sumerge en sesiones de compromiso sin ruido y registra las horas reales invertidas en tus metas.',
+          tags: ['Plan en 6 Fases', 'Modo Búnker', 'Medición de Tiempo', 'Ejecución de Metas', 'Cero Distracciones'],
           highlights: [
-            { title: 'Lógica Industrial', text: 'Aplica secuenciación de línea de montaje para ejecutar objetivos complejos.' }
+            { title: 'Desglose Ejecutable', text: 'Divide objetivos complejos en 6 pasos secuenciales con predicción de tiempo para pasar a la acción.' },
+            { title: 'Control Real del Tiempo', text: 'Telemetría clara de cuántas horas inviertes en cada proyecto para decidir con datos.' }
           ]
         }
       ]
