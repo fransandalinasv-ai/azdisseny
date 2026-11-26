@@ -155,7 +155,7 @@ window.AZ_CONFIG = {
             'assets/images/design/naval-vessel-nda.jpg',
             'assets/images/design/naval-bridge-nda.jpg',
             'assets/images/design/naval-electronics-rack-nda.jpg',
-            'assets/images/design/naval-sheetmetal-5083-nda.jpg'
+            'assets/images/design/naval-battery-bay-nda.jpg'
           ],
           description: 'Complete lifecycle leadership for interior electromechanical systems, consoles, electronics racks and marine 5083 sheet-metal assemblies — from 3D CAD and engineering change requests to supplier negotiation (CNC machining, laser cutting, TIG welding) and shop-floor quality control across 60+ high-speed vessels and 600+ components. Note: Representative visuals — original vessel photographs and CAD drawings are protected under NDA.',
           tags: ['SolidWorks', 'Siemens NX', '5083 Sheet Metal', 'CNC & Laser', 'Mass Production', 'Under NDA'],
@@ -438,7 +438,7 @@ window.AZ_CONFIG = {
             'assets/images/design/naval-vessel-nda.jpg',
             'assets/images/design/naval-bridge-nda.jpg',
             'assets/images/design/naval-electronics-rack-nda.jpg',
-            'assets/images/design/naval-sheetmetal-5083-nda.jpg'
+            'assets/images/design/naval-battery-bay-nda.jpg'
           ],
           description: 'Dirección del ciclo de vida completo de sistemas electromecánicos interiores, consolas, bastidores de electrónica y conjuntos en chapa marina 5083 — desde el modelado CAD 3D y cambios de ingeniería hasta la negociación con proveedores (mecanizado CNC, corte láser, soldadura TIG) y control de calidad en taller para más de 60 embarcaciones y más de 600 componentes. Nota: Imágenes representativas — las fotografías y planos reales están protegidos bajo contrato de confidencialidad (NDA).',
           tags: ['SolidWorks', 'Siemens NX', 'Chapa Marina 5083', 'CNC y Láser', 'Producción en Serie', 'Bajo NDA'],
