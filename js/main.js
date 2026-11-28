@@ -1,17 +1,19 @@
 /* =========================================================
-   AZDISSENY — Interactive Studio Engine
-   Scroll-Reveal, Split-Letter Hover, Live Clock, Modals
+   AZDISSENY — Interactive Kinetic Studio Engine
+   Ken Burns Hero + Live Progress, Continuous Kinetic Strip,
+   Bolet Spotlight, 2nd-Image Hover Crossfade, Typographic
+   Capabilities, Mobile Drawer, Bilingual EN/ES & Modals
    ========================================================= */
 
 'use strict';
 
 (function () {
   const CFG = window.AZ_CONFIG;
+  const HERO_INTERVAL_MS = 5000;
   let currentLang = localStorage.getItem('az_lang') || 'en';
-  let activeServiceIdx = 0;
-  let serviceTimer = null;
   let heroSlideIdx = 0;
   let heroTimer = null;
+  let heroPaused = false;
   let revealObserver = null;
 
   /* -------------------------------------------------------
@@ -21,198 +23,376 @@
     return path.split('.').reduce((acc, k) => (acc && acc[k] !== undefined ? acc[k] : ''), obj);
   }
 
-  function makeSplitButtonContent(text) {
-    const chars = Array.from(text).map((ch, idx) => {
-      const safe = ch === ' ' ? '&nbsp;' : ch;
-      const delay = `${idx * 18}ms`;
-      return `<span class="char-swap" style="--d:${delay}"><span class="char-swap__top">${safe}</span><span class="char-swap__bot" aria-hidden="true">${safe}</span></span>`;
-    }).join('');
-    return `<span class="btn-animated__inner">${chars}</span>`;
+  function formatIndex(idx, total) {
+    const a = String(idx + 1).padStart(2, '0');
+    const b = String(total).padStart(2, '0');
+    return `${a} / ${b}`;
   }
 
-  function enhanceAnimatedButtons(root = document) {
-    root.querySelectorAll('.btn-animated').forEach((btn) => {
-      const raw = btn.getAttribute('data-raw-label') || btn.textContent.trim();
-      btn.setAttribute('data-raw-label', raw);
-      btn.innerHTML = makeSplitButtonContent(raw);
+  function buildKineticButtonMarkup(label, withArrow = false) {
+    const arrow = withArrow ? ' <span class="btn-kinetic__arrow" aria-hidden="true">→</span>' : '';
+    return `<span class="btn-kinetic__slot"><span class="btn-kinetic__top">${label}</span><span class="btn-kinetic__bot" aria-hidden="true">${label}</span></span>${arrow}`;
+  }
+
+  function enhanceKineticButtons(root = document) {
+    root.querySelectorAll('.btn-kinetic').forEach((btn) => {
+      if (btn.querySelector('.btn-kinetic__slot')) return;
+      const withArrow = btn.hasAttribute('data-arrow');
+      const label = btn.textContent.trim();
+      btn.innerHTML = buildKineticButtonMarkup(label, withArrow);
     });
   }
 
   /* -------------------------------------------------------
-     LIVE BARCELONA CLOCK
+     FULL-HEIGHT MOBILE DRAWER
   ------------------------------------------------------- */
-  function startClock() {
-    const el = document.getElementById('bcn-clock');
-    if (!el) return;
-    const fmt = new Intl.DateTimeFormat('en-GB', {
-      timeZone: 'Europe/Madrid',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      hour12: false
+  function setMobileDrawerState(open) {
+    const toggle = document.getElementById('menu-toggle');
+    const drawer = document.getElementById('mobile-drawer');
+    if (!toggle || !drawer) return;
+    toggle.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    drawer.classList.toggle('is-open', open);
+    drawer.setAttribute('aria-hidden', String(!open));
+    document.body.classList.toggle('menu-open', open);
+  }
+
+  function closeMobileDrawer() {
+    setMobileDrawerState(false);
+  }
+
+  function initMobileDrawer() {
+    const toggle = document.getElementById('menu-toggle');
+    const drawer = document.getElementById('mobile-drawer');
+    if (!toggle || !drawer) return;
+
+    toggle.addEventListener('click', () => {
+      const opening = !drawer.classList.contains('is-open');
+      setMobileDrawerState(opening);
     });
-    const tick = () => { el.textContent = fmt.format(new Date()); };
-    tick();
-    setInterval(tick, 1000);
+
+    drawer.querySelectorAll('a, [data-open-contact]').forEach((el) => {
+      el.addEventListener('click', closeMobileDrawer);
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 860) closeMobileDrawer();
+    });
   }
 
   /* -------------------------------------------------------
-     HERO CROSSFADE BACKDROP
+     HERO SHOWCASE FRAME (KEN BURNS + LIVE PROGRESS BAR)
   ------------------------------------------------------- */
-  function initHero() {
-    const backdrop = document.getElementById('hero-backdrop');
-    const indicators = document.getElementById('hero-indicators');
-    if (!backdrop || !indicators) return;
+  function restartHeroProgress() {
+    const fill = document.getElementById('hero-progress-fill');
+    if (!fill) return;
+    fill.classList.remove('is-running');
+    void fill.offsetWidth;
+    fill.classList.add('is-running');
+  }
 
-    backdrop.innerHTML = CFG.heroSlides.map((s, i) => `
-      <div class="hero__slide ${i === 0 ? 'is-active' : ''}">
-        <img src="${s.src}" alt="${s.alt}">
-      </div>
-    `).join('');
+  function updateHeroUI(animateCaption = false) {
+    const slidesEl = document.getElementById('hero-slides');
+    const dotsEl = document.getElementById('hero-indicators');
+    const counterEl = document.getElementById('hero-counter');
+    const captionEl = document.getElementById('hero-caption');
+    if (!slidesEl || !dotsEl) return;
 
-    indicators.innerHTML = CFG.heroSlides.map((_, i) => `
-      <span class="hero__dot ${i === 0 ? 'is-active' : ''}"></span>
-    `).join('');
+    const slideData = CFG.heroSlides[heroSlideIdx];
+    slidesEl.querySelectorAll('.hero-slide').forEach((el, i) => {
+      const active = i === heroSlideIdx;
+      el.classList.remove('is-active');
+      if (active) {
+        void el.offsetWidth;
+        el.classList.add('is-active');
+      }
+    });
 
-    const slides = backdrop.querySelectorAll('.hero__slide');
-    const dots = indicators.querySelectorAll('.hero__dot');
+    dotsEl.querySelectorAll('.hero-dot').forEach((el, i) => {
+      const active = i === heroSlideIdx;
+      el.classList.toggle('is-active', active);
+      el.setAttribute('aria-selected', String(active));
+    });
 
+    if (counterEl) {
+      counterEl.textContent = formatIndex(heroSlideIdx, CFG.heroSlides.length);
+    }
+
+    if (captionEl && slideData && slideData.caption) {
+      const nextText = slideData.caption[currentLang] || slideData.caption.en;
+      if (animateCaption) {
+        captionEl.classList.add('is-swapping');
+        setTimeout(() => {
+          captionEl.textContent = nextText;
+          captionEl.classList.remove('is-swapping');
+        }, 140);
+      } else {
+        captionEl.textContent = nextText;
+      }
+    }
+
+    restartHeroProgress();
+  }
+
+  function startHeroTimer() {
     if (heroTimer) clearInterval(heroTimer);
     heroTimer = setInterval(() => {
-      slides[heroSlideIdx].classList.remove('is-active');
-      dots[heroSlideIdx].classList.remove('is-active');
-      heroSlideIdx = (heroSlideIdx + 1) % slides.length;
-      slides[heroSlideIdx].classList.add('is-active');
-      dots[heroSlideIdx].classList.add('is-active');
-    }, 5200);
+      if (heroPaused) return;
+      heroSlideIdx = (heroSlideIdx + 1) % CFG.heroSlides.length;
+      updateHeroUI(true);
+    }, HERO_INTERVAL_MS);
   }
 
-  /* -------------------------------------------------------
-     MARQUEE TICKER
-  ------------------------------------------------------- */
-  function initMarquee() {
-    const track = document.getElementById('marquee-track');
-    if (!track) return;
-    const block = CFG.marqueeItems.map((item) => `<span>${item}</span><span class="marquee__dot">·</span>`).join('');
-    track.innerHTML = block + block;
+  function goToHeroSlide(idx) {
+    const total = CFG.heroSlides.length;
+    heroSlideIdx = ((idx % total) + total) % total;
+    updateHeroUI(true);
+    startHeroTimer();
   }
 
-  /* -------------------------------------------------------
-     SERVICES INTERACTIVE STAGE
-  ------------------------------------------------------- */
-  function renderServices(dict) {
-    const tabsEl = document.getElementById('services-tabs');
-    const slidesEl = document.getElementById('services-slides');
-    const progEl = document.getElementById('services-progress');
-    if (!tabsEl || !slidesEl || !progEl) return;
+  function initHero() {
+    const slidesEl = document.getElementById('hero-slides');
+    const dotsEl = document.getElementById('hero-indicators');
+    const prevBtn = document.getElementById('hero-prev');
+    const nextBtn = document.getElementById('hero-next');
+    const showcase = document.getElementById('hero-showcase');
+    if (!slidesEl || !dotsEl) return;
 
-    const pillars = dict.services.pillars;
-
-    tabsEl.innerHTML = pillars.map((p, i) => `
-      <button type="button" class="services-tab ${i === activeServiceIdx ? 'is-active' : ''}" data-service-idx="${i}" role="tab">
-        <span>${p.tabLabel}</span>
-        <span>→</span>
-      </button>
-    `).join('');
-
-    slidesEl.innerHTML = pillars.map((p, i) => `
-      <div class="stage-slide ${i === activeServiceIdx ? 'is-active' : ''}" data-stage-idx="${i}">
-        <div class="stage-slide__glow" style="background:${p.glow}"></div>
-        <div class="stage-slide__content">
-          <div class="stage-slide__index">${p.index}</div>
-          <h3 class="stage-slide__title">${p.title}</h3>
-          <p class="stage-slide__desc">${p.desc}</p>
-          <div class="stage-slide__chips">
-            ${p.chips.map((c) => `<span class="chip">${c}</span>`).join('')}
-          </div>
+    slidesEl.innerHTML = CFG.heroSlides.map((s, i) => {
+      const isContain = s.fit === 'contain';
+      const slideCls = isContain ? 'hero-slide hero-slide--contain' : 'hero-slide';
+      const fitStyle = isContain ? 'object-fit:contain;padding:14px;' : 'object-fit:cover;';
+      const posStyle = s.position ? `object-position:${s.position};` : '';
+      const bgStyle = s.bg ? ` style="background:${s.bg}"` : '';
+      return `
+        <div class="${slideCls} ${i === heroSlideIdx ? 'is-active' : ''}"${bgStyle}>
+          <img src="${s.src}" alt="${s.alt}" style="${fitStyle}${posStyle}">
         </div>
-      </div>
+      `;
+    }).join('');
+
+    dotsEl.innerHTML = CFG.heroSlides.map((_, i) => `
+      <button type="button" class="hero-dot ${i === heroSlideIdx ? 'is-active' : ''}" data-hero-dot="${i}" role="tab" aria-label="Slide ${i + 1}" aria-selected="${i === heroSlideIdx}"></button>
     `).join('');
 
-    progEl.innerHTML = pillars.map((_, i) => `
-      <div class="progress-bar ${i === activeServiceIdx ? 'is-active' : ''}" data-service-idx="${i}">
-        <div class="progress-bar__fill"></div>
-      </div>
-    `).join('');
-
-    const setService = (idx) => {
-      activeServiceIdx = idx;
-      tabsEl.querySelectorAll('.services-tab').forEach((el, i) => el.classList.toggle('is-active', i === idx));
-      slidesEl.querySelectorAll('.stage-slide').forEach((el, i) => el.classList.toggle('is-active', i === idx));
-      progEl.querySelectorAll('.progress-bar').forEach((el, i) => {
-        el.classList.remove('is-active');
-        void el.offsetWidth;
-        if (i === idx) el.classList.add('is-active');
-      });
-      restartServiceTimer();
-    };
-
-    tabsEl.querySelectorAll('[data-service-idx]').forEach((btn) => {
-      btn.addEventListener('click', () => setService(Number(btn.dataset.serviceIdx)));
-    });
-    progEl.querySelectorAll('[data-service-idx]').forEach((bar) => {
-      bar.addEventListener('click', () => setService(Number(bar.dataset.serviceIdx)));
+    dotsEl.querySelectorAll('[data-hero-dot]').forEach((dot) => {
+      dot.addEventListener('click', () => goToHeroSlide(Number(dot.dataset.heroDot)));
     });
 
-    function restartServiceTimer() {
-      if (serviceTimer) clearInterval(serviceTimer);
-      serviceTimer = setInterval(() => {
-        setService((activeServiceIdx + 1) % pillars.length);
-      }, 6000);
+    if (prevBtn) prevBtn.addEventListener('click', () => goToHeroSlide(heroSlideIdx - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => goToHeroSlide(heroSlideIdx + 1));
+
+    if (showcase) {
+      const setPaused = (paused) => {
+        heroPaused = paused;
+        showcase.classList.toggle('is-paused', paused);
+      };
+      showcase.addEventListener('mouseenter', () => setPaused(true));
+      showcase.addEventListener('mouseleave', () => setPaused(false));
+      showcase.addEventListener('focusin', () => setPaused(true));
+      showcase.addEventListener('focusout', () => setPaused(false));
     }
-    restartServiceTimer();
+
+    updateHeroUI(false);
+    startHeroTimer();
   }
 
   /* -------------------------------------------------------
-     PROJECT GRIDS (Hardware + Software/AI)
+     CONTINUOUS MONOCHROME KINETIC STRIP
   ------------------------------------------------------- */
-  function projectCardHTML(p, delayIdx) {
+  function renderKineticStrip(dict) {
+    const track = document.getElementById('kinetic-track');
+    if (!track || !dict.kineticItems) return;
+    const groupHTML = `
+      <div class="kinetic-strip__group">
+        ${dict.kineticItems.map((item) => `<span>${item}</span><span class="kinetic-strip__sep">/</span>`).join('')}
+      </div>
+    `;
+    track.innerHTML = groupHTML + groupHTML;
+  }
+
+  /* -------------------------------------------------------
+     01 / PHYSICAL PRODUCTS (BOLET SPOTLIGHT + 3 KINETIC CARDS)
+  ------------------------------------------------------- */
+  function featuredHardwareHTML(p, dict) {
+    const tags = p.featuredTags || p.tags.slice(0, 3);
     const posStyle = p.coverPosition ? ` style="object-position:${p.coverPosition}"` : '';
     return `
-      <button type="button" class="project-card reveal" style="transition-delay:${delayIdx * 70}ms" data-open-project="${p.id}">
-        <img class="project-card__img" src="${p.cover}" alt="${p.title}" loading="lazy"${posStyle}>
-        <div class="project-card__scrim"></div>
-        <div class="project-card__top">
-          <div>
-            <div class="project-card__title">${p.title}</div>
-            <div class="project-card__meta">${p.meta}</div>
-          </div>
-          <span class="project-card__arrow" aria-hidden="true">↗</span>
+      <article class="featured-work reveal">
+        <div class="featured-work__media" data-open-project="${p.id}" role="button" tabindex="0" aria-label="${p.title}">
+          <img class="featured-work__img" src="${p.cover}" alt="${p.title}"${posStyle}>
         </div>
-        <div class="project-card__bottom">
-          <p class="project-card__summary">${p.summary}</p>
+        <div class="featured-work__body">
+          <div class="featured-work__top">
+            <span class="featured-badge">${dict.work.featuredBadge}</span>
+            <div class="featured-work__meta">${p.meta}</div>
+            <h3 class="featured-work__title">${p.title}</h3>
+            <p class="featured-work__summary">${p.summary}</p>
+            <div class="featured-work__tags">
+              ${tags.map((t) => `<span class="chip">${t}</span>`).join('')}
+            </div>
+          </div>
+          <div class="featured-work__footer">
+            <button type="button" class="btn btn--primary btn-kinetic" data-open-project="${p.id}" data-arrow>
+              ${buildKineticButtonMarkup(dict.work.featuredCta, true)}
+            </button>
+          </div>
+        </div>
+      </article>
+    `;
+  }
+
+  function mediaBadgeHTML() {
+    return `
+      <span class="media-badge" aria-hidden="true">
+        <span class="media-badge__slot">
+          <span class="media-badge__a">01 / 02</span>
+          <span class="media-badge__b">02 / 02</span>
+        </span>
+      </span>
+    `;
+  }
+
+  function hardwareCardHTML(p, delayIdx, viewLabel) {
+    const hasHover = Boolean(p.hoverCover);
+    const cardClass = hasHover ? 'work-card has-hover reveal' : 'work-card reveal';
+    const posStyle = p.coverPosition ? ` style="object-position:${p.coverPosition}"` : '';
+    const hoverPosStyle = p.hoverPosition ? ` style="object-position:${p.hoverPosition}"` : '';
+    const hoverMarkup = hasHover ? `
+      <div class="card-hover-layer">
+        <img src="${p.hoverCover}" alt="" loading="lazy"${hoverPosStyle}>
+      </div>
+      ${mediaBadgeHTML()}
+    ` : '';
+
+    return `
+      <button type="button" class="${cardClass}" style="transition-delay:${delayIdx * 75}ms" data-open-project="${p.id}">
+        <div class="work-card__media">
+          <img class="work-card__img work-card__img--primary" src="${p.cover}" alt="${p.title}" loading="lazy"${posStyle}>
+          ${hoverMarkup}
+        </div>
+        <div class="work-card__body">
+          <div class="work-card__meta">${p.meta}</div>
+          <h3 class="work-card__title">${p.title}</h3>
+          <p class="work-card__summary">${p.summary}</p>
+          <span class="work-card__link">${viewLabel} <span class="work-card__arrow" aria-hidden="true">→</span></span>
         </div>
       </button>
     `;
   }
 
+  /* -------------------------------------------------------
+     02 / SOFTWARE, APPS & APPLIED AI (DARK GRAPHITE CARDS)
+  ------------------------------------------------------- */
+  function softwareCardHTML(p, delayIdx, viewLabel) {
+    const hasHover = Boolean(p.hoverCover);
+    const isContain = p.coverFit === 'contain';
+    const cardClass = hasHover ? 'lab-card has-hover reveal' : 'lab-card reveal';
+    const imgClass = isContain
+      ? 'lab-card__img lab-card__img--primary lab-card__img--contain'
+      : 'lab-card__img lab-card__img--primary';
+    const posStyle = !isContain && p.coverPosition ? ` style="object-position:${p.coverPosition}"` : '';
+    const bgStyle = p.coverBg ? ` style="background:${p.coverBg}"` : '';
+
+    let hoverMarkup = '';
+    if (hasHover) {
+      const hoverContain = p.hoverFit === 'contain';
+      const hoverLayerCls = hoverContain ? 'card-hover-layer card-hover-layer--contain' : 'card-hover-layer';
+      const hoverBg = p.hoverBg ? ` style="background:${p.hoverBg}"` : '';
+      const hoverPos = !hoverContain && p.hoverPosition ? ` style="object-position:${p.hoverPosition}"` : '';
+      hoverMarkup = `
+        <div class="${hoverLayerCls}"${hoverBg}>
+          <img src="${p.hoverCover}" alt="" loading="lazy"${hoverPos}>
+        </div>
+        ${mediaBadgeHTML()}
+      `;
+    }
+
+    return `
+      <button type="button" class="${cardClass}" style="transition-delay:${delayIdx * 70}ms" data-open-project="${p.id}">
+        <div class="lab-card__media"${bgStyle}>
+          <img class="${imgClass}" src="${p.cover}" alt="${p.title}" loading="lazy"${posStyle}>
+          ${hoverMarkup}
+        </div>
+        <div class="lab-card__body">
+          <div class="lab-card__meta">${p.meta}</div>
+          <h3 class="lab-card__title">${p.title}</h3>
+          <p class="lab-card__summary">${p.summary}</p>
+          <span class="lab-card__link">${viewLabel} <span class="lab-card__arrow" aria-hidden="true">→</span></span>
+        </div>
+      </button>
+    `;
+  }
+
+  /* -------------------------------------------------------
+     03 / CAPABILITIES (100% TYPOGRAPHIC — ZERO PHOTOS)
+  ------------------------------------------------------- */
+  function renderServices(dict) {
+    const grid = document.getElementById('services-grid');
+    if (!grid) return;
+
+    grid.innerHTML = dict.services.pillars.map((p, i) => `
+      <article class="service-card reveal" style="transition-delay:${i * 75}ms">
+        <div class="service-card__head">
+          <span class="service-card__num">${p.num}</span>
+          <span class="service-card__index">0${i + 1} / 03</span>
+        </div>
+        <h3 class="service-card__title">${p.title}</h3>
+        <p class="service-card__desc">${p.desc}</p>
+        <div class="service-card__chips">
+          ${p.chips.map((c) => `<span class="chip">${c}</span>`).join('')}
+        </div>
+      </article>
+    `).join('');
+  }
+
+  /* -------------------------------------------------------
+     RENDER ALL GRIDS
+  ------------------------------------------------------- */
   function renderGrids(dict) {
+    const hwFeatured = document.getElementById('hardware-featured');
     const hwGrid = document.getElementById('hardware-grid');
     const swGrid = document.getElementById('software-grid');
     const procGrid = document.getElementById('process-grid');
 
+    const featuredProj = dict.hardwareProjects.find((p) => p.featured) || dict.hardwareProjects[0];
+    const otherHardware = dict.hardwareProjects.filter((p) => p.id !== featuredProj.id);
+
+    if (hwFeatured && featuredProj) {
+      hwFeatured.innerHTML = featuredHardwareHTML(featuredProj, dict);
+    }
+
     if (hwGrid) {
-      hwGrid.innerHTML = dict.hardwareProjects.map((p, i) => projectCardHTML(p, i)).join('');
+      hwGrid.innerHTML = otherHardware
+        .map((p, i) => hardwareCardHTML(p, i, dict.work.viewProject))
+        .join('');
     }
 
     if (swGrid) {
-      const cards = dict.softwareProjects.map((p, i) => projectCardHTML(p, i)).join('');
-      const mystery = `
-        <div class="project-card project-card--mystery reveal" style="transition-delay:${dict.softwareProjects.length * 70}ms">
-          <img class="project-card__img" src="assets/images/slides/design-lamp.webp" alt="" aria-hidden="true">
-          <div class="mystery__content">
-            <h3 class="mystery__title">${dict.mystery.title}</h3>
-            <p class="mystery__desc">${dict.mystery.desc}</p>
-            <button type="button" class="btn btn--primary btn-animated" data-open-contact>${dict.mystery.cta}</button>
+      const cards = dict.softwareProjects
+        .map((p, i) => softwareCardHTML(p, i, dict.lab.viewProject))
+        .join('');
+      const ctaCard = `
+        <div class="lab-card lab-card--cta reveal" style="transition-delay:${dict.softwareProjects.length * 70}ms">
+          <div class="lab-cta__top">
+            <span class="lab-cta__eyebrow">${dict.mystery.eyebrow}</span>
+            <h3 class="lab-cta__title">${dict.mystery.title}</h3>
+            <p class="lab-cta__desc">${dict.mystery.desc}</p>
+          </div>
+          <div class="lab-cta__bottom">
+            <button type="button" class="btn btn--light btn-kinetic" data-open-contact>
+              ${buildKineticButtonMarkup(dict.mystery.cta, false)}
+            </button>
           </div>
         </div>
       `;
-      swGrid.innerHTML = cards + mystery;
+      swGrid.innerHTML = cards + ctaCard;
     }
 
     if (procGrid) {
       procGrid.innerHTML = dict.process.steps.map((s, i) => `
-        <div class="process-step reveal" style="transition-delay:${i * 80}ms">
+        <div class="process-step reveal" style="transition-delay:${i * 75}ms">
           <span class="process-step__num">${s.num}</span>
           <h3 class="process-step__title">${s.title}</h3>
           <p class="process-step__desc">${s.desc}</p>
@@ -222,10 +402,18 @@
   }
 
   /* -------------------------------------------------------
-     SCROLL REVEAL & FLOATING PILL
+     SCROLL REVEAL (SAFE ON INITIAL LOAD & EN/ES SWITCH)
   ------------------------------------------------------- */
   function initScrollReveal() {
     if (revealObserver) revealObserver.disconnect();
+    const els = document.querySelectorAll('.reveal');
+    const thresholdY = window.innerHeight * 0.98;
+
+    if (!('IntersectionObserver' in window)) {
+      els.forEach((el) => el.classList.add('is-visible'));
+      return;
+    }
+
     revealObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -233,21 +421,16 @@
           revealObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.02, rootMargin: '0px 0px 40px 0px' });
 
-    document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
-  }
-
-  function initFloatingPill() {
-    const pill = document.getElementById('floating-pill');
-    if (!pill) return;
-    const onScroll = () => {
-      const distToBottom = document.documentElement.scrollHeight - (window.scrollY + window.innerHeight);
-      const show = window.scrollY > window.innerHeight * 0.55 && distToBottom > 280;
-      pill.classList.toggle('is-visible', show);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    els.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < thresholdY) {
+        el.classList.add('is-visible');
+      } else {
+        revealObserver.observe(el);
+      }
+    });
   }
 
   /* -------------------------------------------------------
@@ -281,6 +464,11 @@
     if (proj.galleryLayout === 'portrait') galleryClasses.push('proj-modal__gallery--portrait');
     if (proj.galleryLayout === 'landscape') galleryClasses.push('proj-modal__gallery--landscape');
     if (proj.gallery.length === 1) galleryClasses.push('proj-modal__gallery--single');
+    if (proj.galleryLayout === 'portrait' && proj.gallery.length === 5) {
+      galleryClasses.push('proj-modal__gallery--row5');
+    }
+
+    const itemClass = proj.zone === 'digital' ? 'gallery-item gallery-item--dark' : 'gallery-item';
 
     const body = document.getElementById('project-modal-body');
     body.innerHTML = `
@@ -294,7 +482,7 @@
       </div>
 
       <div class="${galleryClasses.join(' ')}">
-        ${proj.gallery.map((src) => `<button type="button" class="gallery-item" data-zoom-img="${src}" aria-label="${proj.title}"><img src="${src}" alt="${proj.title}" loading="lazy"></button>`).join('')}
+        ${proj.gallery.map((src) => `<button type="button" class="${itemClass}" data-zoom-img="${src}" aria-label="${proj.title}"><img src="${src}" alt="${proj.title}" loading="lazy"></button>`).join('')}
       </div>
 
       <div class="proj-modal__highlights">
@@ -308,10 +496,12 @@
 
       <div class="proj-modal__footer">
         <span class="eyebrow" style="margin:0">${dict.modal.specsLabel}</span>
-        <button type="button" class="btn btn--primary btn-animated" data-open-contact-from-project>${dict.modal.buildSimilar}</button>
+        <button type="button" class="btn btn--primary btn-kinetic" data-open-contact-from-project>
+          ${buildKineticButtonMarkup(dict.modal.buildSimilar, false)}
+        </button>
       </div>
     `;
-    enhanceAnimatedButtons(body);
+
     body.querySelector('[data-open-contact-from-project]').addEventListener('click', () => {
       closeModal('project-modal');
       openContactModal();
@@ -324,7 +514,7 @@
     const body = document.getElementById('contact-modal-body');
     body.innerHTML = `
       <span class="eyebrow">AZDISSENY · A-Z DISSENY, SL</span>
-      <h2 class="proj-modal__title" style="font-size:26px">${m.contactTitle}</h2>
+      <h2 class="proj-modal__title" style="font-size:28px">${m.contactTitle}</h2>
       <p class="proj-modal__desc" style="margin-bottom:0">${m.contactSub}</p>
 
       <form class="form-stack" id="az-contact-form">
@@ -352,10 +542,11 @@
         </label>
         <p class="form-rgpd-note">${m.rgpdNote}</p>
         <div class="form-status" id="az-form-status"></div>
-        <button type="submit" class="btn btn--primary btn-animated" id="az-form-submit">${m.submit}</button>
+        <button type="submit" class="btn btn--primary btn-kinetic" id="az-form-submit">
+          ${buildKineticButtonMarkup(m.submit, false)}
+        </button>
       </form>
     `;
-    enhanceAnimatedButtons(body);
 
     const form = document.getElementById('az-contact-form');
     const status = document.getElementById('az-form-status');
@@ -381,8 +572,7 @@
         status.classList.add('is-error');
       } finally {
         submitBtn.disabled = false;
-        submitBtn.setAttribute('data-raw-label', m.submit);
-        submitBtn.innerHTML = makeSplitButtonContent(m.submit);
+        submitBtn.innerHTML = buildKineticButtonMarkup(m.submit, false);
       }
     });
 
@@ -410,6 +600,36 @@
   }
 
   /* -------------------------------------------------------
+     LIGHTBOX CLICK-TO-ZOOM
+  ------------------------------------------------------- */
+  function openLightbox(src, alt) {
+    let box = document.getElementById('img-lightbox');
+    if (!box) {
+      box = document.createElement('div');
+      box.id = 'img-lightbox';
+      box.className = 'img-lightbox';
+      box.setAttribute('role', 'dialog');
+      box.setAttribute('aria-modal', 'true');
+      box.innerHTML = `
+        <button type="button" class="img-lightbox__close" aria-label="Close">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <img class="img-lightbox__img" src="" alt="">
+      `;
+      box.addEventListener('click', (ev) => {
+        if (ev.target === box || ev.target.closest('.img-lightbox__close')) {
+          box.classList.remove('is-open');
+        }
+      });
+      document.body.appendChild(box);
+    }
+    const img = box.querySelector('.img-lightbox__img');
+    img.src = src;
+    img.alt = alt;
+    box.classList.add('is-open');
+  }
+
+  /* -------------------------------------------------------
      APPLY LANGUAGE & FULL RENDER
   ------------------------------------------------------- */
   function setLanguage(lang) {
@@ -431,14 +651,16 @@
     document.querySelectorAll('[data-i18n-btn]').forEach((el) => {
       const val = getByPath(dict, el.dataset.i18nBtn);
       if (val) {
-        el.setAttribute('data-raw-label', val);
-        el.innerHTML = makeSplitButtonContent(val);
+        const withArrow = el.hasAttribute('data-arrow');
+        el.innerHTML = buildKineticButtonMarkup(val, withArrow);
       }
     });
 
-    renderServices(dict);
+    updateHeroUI(false);
+    renderKineticStrip(dict);
     renderGrids(dict);
-    enhanceAnimatedButtons(document);
+    renderServices(dict);
+    enhanceKineticButtons(document);
     initScrollReveal();
   }
 
@@ -481,38 +703,25 @@
     }
   });
 
-  function openLightbox(src, alt) {
-    let box = document.getElementById('img-lightbox');
-    if (!box) {
-      box = document.createElement('div');
-      box.id = 'img-lightbox';
-      box.className = 'img-lightbox';
-      box.setAttribute('role', 'dialog');
-      box.setAttribute('aria-modal', 'true');
-      box.innerHTML = `
-        <button type="button" class="img-lightbox__close" aria-label="Close">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-        <img class="img-lightbox__img" src="" alt="">
-      `;
-      box.addEventListener('click', (ev) => {
-        if (ev.target === box || ev.target.closest('.img-lightbox__close')) {
-          box.classList.remove('is-open');
-        }
-      });
-      document.body.appendChild(box);
-    }
-    const img = box.querySelector('.img-lightbox__img');
-    img.src = src;
-    img.alt = alt;
-    box.classList.add('is-open');
-  }
-
   document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      const roleProj = e.target.closest('[role="button"][data-open-project]');
+      if (roleProj) {
+        e.preventDefault();
+        openProjectDetail(roleProj.dataset.openProject);
+        return;
+      }
+    }
+
     if (e.key === 'Escape') {
       const box = document.getElementById('img-lightbox');
       if (box && box.classList.contains('is-open')) {
         box.classList.remove('is-open');
+        return;
+      }
+      const drawer = document.getElementById('mobile-drawer');
+      if (drawer && drawer.classList.contains('is-open')) {
+        closeMobileDrawer();
         return;
       }
       document.querySelectorAll('.modal:not(.hidden)').forEach((m) => closeModal(m.id));
@@ -523,10 +732,8 @@
      BOOT
   ------------------------------------------------------- */
   document.addEventListener('DOMContentLoaded', () => {
-    startClock();
+    initMobileDrawer();
     initHero();
-    initMarquee();
-    initFloatingPill();
     setLanguage(currentLang);
   });
 })();

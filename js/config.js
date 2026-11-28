@@ -9,32 +9,60 @@ window.AZ_CONFIG = {
   email: 'azdisseny.sl@gmail.com',
   formEndpoint: 'https://formsubmit.co/ajax/azdisseny.sl@gmail.com',
 
+  /* Hero Engineering Stage — 4 unique images (zero overlap with #work or #lab) */
   heroSlides: [
-    { src: 'assets/images/slides/design-lamp.webp', alt: 'AZdisseny Parametric Lighting Design' },
-    { src: 'assets/images/design/naval-vessel-nda.jpg', alt: 'High-Speed Naval Electromechanical Architecture (Representative Visual · Under NDA)' },
-    { src: 'assets/images/design/heater-exploded.png', alt: 'Smart Heater Exploded CAD Assembly' },
-    { src: 'assets/images/software/prometeos-organigrama.png', alt: 'prometeOS Multi-Agent AI Architecture' }
-  ],
-
-  marqueeItems: [
-    'INDUSTRIAL DESIGN',
-    'SOLIDWORKS & RHINO 3D',
-    'MASS PRODUCTION LEADERSHIP',
-    'SUPPLIER & SUPPLY CHAIN MANAGEMENT',
-    'DFM · SHEET METAL · CNC · 3D PRINTING',
-    'MOBILE APPS (FLUTTER & SUPABASE)',
-    'PYTHON AUTOMATION',
-    'APPLIED AI SYSTEMS'
+    {
+      src: 'assets/images/design/naval-bridge-nda.jpg',
+      alt: 'High-Speed Naval Bridge Electromechanical Interior (Representative Visual · Under NDA)',
+      position: 'center center',
+      fit: 'cover',
+      caption: {
+        en: 'Naval Bridge · Electromechanical Interior (NDA)',
+        es: 'Puente Naval · Interior Electromecánico (NDA)'
+      }
+    },
+    {
+      src: 'assets/images/design/heater-cfd.png',
+      alt: 'Smart Water Heater Helical CFD Thermal Simulation',
+      position: 'center center',
+      fit: 'contain',
+      bg: '#FFFFFF',
+      caption: {
+        en: 'Smart Water Heater · CFD Thermal Simulation',
+        es: 'Smart Water Heater · Simulación Térmica CFD'
+      }
+    },
+    {
+      src: 'assets/images/design/naval-electronics-rack-nda.jpg',
+      alt: 'Marine 5083 Sheet Metal Series Electronics Rack (Representative Visual · Under NDA)',
+      position: 'center center',
+      fit: 'cover',
+      caption: {
+        en: 'Marine 5083 Sheet Metal · Series Electronics Rack (NDA)',
+        es: 'Chapa Marina 5083 · Rack Electrónico en Serie (NDA)'
+      }
+    },
+    {
+      src: 'assets/images/software/prometeos-panel.png',
+      alt: 'prometeOS Multi-Agent Control Panel',
+      position: 'center center',
+      fit: 'contain',
+      bg: '#060609',
+      caption: {
+        en: 'prometeOS · Multi-Agent Control Panel',
+        es: 'prometeOS · Panel de Control Multi-Agente'
+      }
+    }
   ],
 
   i18n: {
     en: {
       nav: {
-        services: 'Services',
-        work: 'Work',
+        work: 'Physical',
         lab: 'Software & AI',
+        services: 'Capabilities',
         process: 'Process',
-        contact: 'Contact'
+        cta: 'Start a Project'
       },
       hero: {
         eyebrow: 'PHYSICAL & DIGITAL PRODUCT STUDIO · BARCELONA',
@@ -43,8 +71,32 @@ window.AZ_CONFIG = {
         ctaPrimary: 'Start a Project',
         ctaSecondary: 'Explore Work'
       },
+      kineticItems: [
+        'INDUSTRIAL DESIGN & 3D CAD',
+        'BIOMATERIAL R&D',
+        'MASS PRODUCTION & SUPPLIERS',
+        'DFM · CNC · SHEET METAL · MOLDS',
+        'MOBILE APPS & UX / UI',
+        'APPLIED AI SYSTEMS',
+        'SOLIDWORKS · RHINO 3D · SIEMENS NX',
+        'BARCELONA · END-TO-END STUDIO'
+      ],
+      work: {
+        eyebrow: '01 / PHYSICAL PRODUCTS',
+        title: 'Industrial Design, R&D & Mass Production.',
+        desc: 'Biomaterial innovation, parametric lighting, mechanical assemblies and series manufacturing led directly with fabricators.',
+        featuredBadge: 'FEATURED R&D · BIOMATERIALS',
+        featuredCta: 'Explore Bolet Lamp',
+        viewProject: 'View project'
+      },
+      lab: {
+        eyebrow: '02 / SOFTWARE, APPS & APPLIED AI',
+        title: 'Digital Products and AI Systems.',
+        desc: 'In-house mobile apps and AI tools designed to solve real everyday problems with clarity and craft.',
+        viewProject: 'View project'
+      },
       services: {
-        eyebrow: '01 / CAPABILITIES',
+        eyebrow: '03 / CAPABILITIES',
         title: 'From raw concept to factory floor & app launch.',
         desc: 'Most studios stop at renders. We design, engineer, manage suppliers for mass production, and build the software around your product.',
         cta: 'Discuss Your Idea',
@@ -52,42 +104,26 @@ window.AZ_CONFIG = {
         pillars: [
           {
             id: 'design',
-            tabLabel: '01 · Product Design & CAD 3D',
-            index: 'CAPABILITY 01 / 03',
+            num: '01',
             title: 'Industrial Design & Precision Mechanical CAD',
             desc: 'From organic Class-A surfacing to complex electromechanical assemblies ready for fabrication. Complete 3D models, weldment & part drawings, tolerances and BOM.',
-            glow: 'radial-gradient(circle at 70% 35%, rgba(217, 119, 6, 0.42), rgba(15, 15, 18, 0.9) 70%)',
             chips: ['SolidWorks', 'Rhino 3D & Grasshopper', 'Siemens NX', 'AutoCAD', 'Class-A Surfacing', 'FEA / CFD', 'BOM & Drawings']
           },
           {
             id: 'production',
-            tabLabel: '02 · Mass Production & Suppliers',
-            index: 'CAPABILITY 02 / 03',
+            num: '02',
             title: 'Mass Production Leadership & Supply Chain',
             desc: 'Need to manufacture at scale? We handle DFM optimization, supplier sourcing and negotiation (CNC, laser cutting, sheet metal, molds, 3D printing), quality control and series delivery.',
-            glow: 'radial-gradient(circle at 65% 40%, rgba(220, 38, 38, 0.36), rgba(15, 15, 18, 0.92) 70%)',
             chips: ['DFM Optimization', 'Supplier Negotiation', 'CNC & Laser Cut', 'Sheet Metal', 'Custom Molds', '3D Printing (FDM/SLA)', 'QC & Series Production']
           },
           {
             id: 'software',
-            tabLabel: '03 · Software, Apps & Applied AI',
-            index: 'CAPABILITY 03 / 03',
+            num: '03',
             title: 'Mobile Apps, Digital Products & Applied AI',
             desc: 'We design and build clean, high-performance mobile apps, web platforms, Python engineering automation and AI agent workflows tailored to real operations.',
-            glow: 'radial-gradient(circle at 68% 35%, rgba(37, 99, 235, 0.42), rgba(15, 15, 18, 0.92) 70%)',
             chips: ['Flutter & Dart', 'iOS & Android', 'Supabase & SQL', 'UX / UI Figma', 'Python Automation', 'Applied AI Agents']
           }
         ]
-      },
-      work: {
-        eyebrow: '02 / HARDWARE & MASS PRODUCTION',
-        title: 'Physical Products & Production Engineering.',
-        desc: 'Selected mechanical engineering, mass production leadership, biomaterial R&D and parametric lighting.'
-      },
-      lab: {
-        eyebrow: '03 / SOFTWARE, APPS AND APPLIED AI',
-        title: 'Digital Products and AI Systems.',
-        desc: 'In-house mobile apps and AI tools designed to solve real everyday problems with clarity and craft.'
       },
       process: {
         eyebrow: '04 / HOW WE WORK',
@@ -100,6 +136,7 @@ window.AZ_CONFIG = {
         ]
       },
       mystery: {
+        eyebrow: 'NEW PROJECT',
         title: 'Your Next Product?',
         desc: 'Hardware, mass production or a digital app — bring the idea.',
         cta: 'Start a Project'
@@ -109,14 +146,12 @@ window.AZ_CONFIG = {
         headline: 'Have a product, production run or app in mind?',
         cta: 'Start a Project',
         contactLabel: 'DIRECT',
-        socialLabel: 'STUDIO',
+        socialLabel: 'CHANNELS',
         legalLabel: 'LEGAL',
+        entityLabel: 'ENTITY',
         legalNotice: 'Legal Notice',
         privacy: 'Privacy',
         cookies: 'Cookies'
-      },
-      floating: {
-        cta: 'Start a Project'
       },
       modal: {
         buildSimilar: 'Build something similar',
@@ -146,11 +181,55 @@ window.AZ_CONFIG = {
       },
       hardwareProjects: [
         {
+          id: 'bolet-lamp',
+          zone: 'physical',
+          featured: true,
+          title: 'Bolet Lamp',
+          meta: 'BIOMATERIAL R&D · NETHERLANDS',
+          summary: 'Circular organic mycelium lamp grown inside custom 3D-printed molds, featuring a contactless proximity sensor for touch-free dimming and snap-fit LED thermal decoupling.',
+          featuredTags: ['Mycelium Biomaterial', 'Contactless Sensor', 'Circular R&D'],
+          cover: 'assets/images/design/bolet-lamp.jpg',
+          coverPosition: 'center 72%',
+          gallery: [
+            'assets/images/design/bolet-lamp.jpg'
+          ],
+          description: 'Functional biodegradable architectural lamp developed during an international R&D project in the Netherlands. Grown organically in mycelium using custom 3D-printed molds to control material density and warm light diffusion, paired with a contactless gesture sensor, snap-fit mechanical joints and LED thermal decoupling.',
+          tags: ['Mycelium Biomaterial', 'Contactless Sensor', '3D-Printed Molds', 'Circular R&D', 'Snap-Fit DFM'],
+          highlights: [
+            { title: 'Mycelium Cultivation & Tooling', text: 'Custom 3D-printed molds engineered to shape organic mycelium growth density and soft light output.' },
+            { title: 'Contactless Interaction', text: 'Integrated top proximity sensor enables intuitive touch-free activation and dimming without breaking the organic surface.' },
+            { title: 'End-to-End R&D', text: 'Functional circular prototype delivered in 6 months leading a multidisciplinary team in the Netherlands.' }
+          ]
+        },
+        {
+          id: 'firestone-lamp',
+          zone: 'physical',
+          title: 'Firestone Lamp',
+          meta: 'PARAMETRIC LIGHTING · 3D PRINT',
+          summary: 'Class-A G2 continuous organic surfacing produced in-house via digital additive manufacturing.',
+          cover: 'assets/images/slides/design-lamp.webp',
+          coverPosition: 'center 58%',
+          gallery: [
+            'assets/images/slides/design-lamp.webp',
+            'assets/images/design/firestone.png'
+          ],
+          description: 'In-house parametric decorative lighting piece by A-Z DISSENY, SL. Engineered with Class-A continuous organic surfaces and produced directly with FDM additive manufacturing.',
+          tags: ['Rhino 3D', 'Grasshopper', 'Class-A Surfacing', 'FDM 3D Printing', 'Lighting Design'],
+          highlights: [
+            { title: 'Parametric Surface', text: 'Organic geometry built with G2 continuity for smooth light gradients.' },
+            { title: 'In-House Manufacturing', text: 'Direct digital fabrication without expensive injection tooling.' }
+          ]
+        },
+        {
           id: 'naval',
+          zone: 'physical',
           title: 'Naval Electromechanical Systems',
           meta: 'MASS PRODUCTION · +60 VESSELS · UNDER NDA',
           summary: 'Interior electromechanical systems, marine 5083 sheet metal, supplier management and series production for 60+ vessels. Representative visuals (originals protected under NDA).',
           cover: 'assets/images/design/naval-vessel-nda.jpg',
+          coverPosition: '60% center',
+          hoverCover: 'assets/images/design/naval-battery-bay-nda.jpg',
+          hoverPosition: 'center center',
           gallery: [
             'assets/images/design/naval-vessel-nda.jpg',
             'assets/images/design/naval-bridge-nda.jpg',
@@ -167,10 +246,14 @@ window.AZ_CONFIG = {
         },
         {
           id: 'smart-heater',
+          zone: 'physical',
           title: 'Smart Water Heater',
           meta: 'CAD · FEA / CFD · UX',
           summary: 'Thermal optimization, exploded mechanical CAD architecture and user-centered control unit.',
           cover: 'assets/images/design/heater-exploded.png',
+          coverPosition: 'center center',
+          hoverCover: 'assets/images/design/heater-control.png',
+          hoverPosition: 'center center',
           gallery: [
             'assets/images/design/heater-exploded.png',
             'assets/images/design/heater-control.png',
@@ -183,48 +266,21 @@ window.AZ_CONFIG = {
             { title: 'Mechanical Architecture', text: 'Modular internal assembly designed for serviceability and manufacturing.' },
             { title: 'Simulation', text: 'Helical flow CFD and rotor FEA validation prior to prototyping.' }
           ]
-        },
-        {
-          id: 'bolet-lamp',
-          title: 'Bolet Lamp',
-          meta: 'BIOMATERIAL R&D · NETHERLANDS',
-          summary: 'Circular organic mycelium lamp with custom 3D-printed molds and snap-fit thermal decoupling.',
-          cover: 'assets/images/design/bolet-lamp.jpg',
-          gallery: [
-            'assets/images/design/bolet-lamp.jpg'
-          ],
-          description: 'Functional biodegradable architectural lamp developed during an international R&D project in the Netherlands. Custom 3D-printed molds control mycelium density and light diffusion, paired with snap-fit mechanical joints and LED thermal decoupling.',
-          tags: ['Biomaterials', '3D-Printed Molds', 'R&D Leadership', 'Snap-Fit DFM', 'Lighting'],
-          highlights: [
-            { title: 'Custom Tooling', text: '3D-printed molds engineered to shape organic growth density and light output.' },
-            { title: 'End-to-End R&D', text: 'Functional prototype delivered in 6 months leading a multidisciplinary team.' }
-          ]
-        },
-        {
-          id: 'firestone-lamp',
-          title: 'Firestone Lamp',
-          meta: 'PARAMETRIC LIGHTING · 3D PRINT',
-          summary: 'Class-A G2 continuous organic surfacing produced in-house via digital additive manufacturing.',
-          cover: 'assets/images/design/firestone.png',
-          gallery: [
-            'assets/images/design/firestone.png',
-            'assets/images/slides/design-lamp.webp'
-          ],
-          description: 'In-house parametric decorative lighting piece by A-Z DISSENY, SL. Engineered with Class-A continuous organic surfaces and produced directly with FDM additive manufacturing.',
-          tags: ['Rhino 3D', 'Grasshopper', 'Class-A Surfacing', 'FDM 3D Printing', 'Lighting Design'],
-          highlights: [
-            { title: 'Parametric Surface', text: 'Organic geometry built with G2 continuity for smooth light gradients.' },
-            { title: 'In-House Manufacturing', text: 'Direct digital fabrication without expensive injection tooling.' }
-          ]
         }
       ],
       softwareProjects: [
         {
           id: 'prometeos',
+          zone: 'digital',
           title: 'prometeOS',
           meta: 'APPLIED AI · OPERATIONS OS',
           summary: 'AI operating system that organizes multi-department work, keeps every project under control, and runs light on your machine.',
           cover: 'assets/images/software/prometeos-organigrama.png',
+          coverFit: 'contain',
+          coverBg: '#09090d',
+          hoverCover: 'assets/images/software/prometeos-cadena.png',
+          hoverFit: 'contain',
+          hoverBg: '#09090d',
           galleryLayout: 'landscape',
           gallery: [
             'assets/images/software/prometeos-organigrama.png',
@@ -240,11 +296,14 @@ window.AZ_CONFIG = {
         },
         {
           id: 'medixi',
+          zone: 'digital',
           title: 'mediXI',
           meta: 'PRIVATE BETA · BARCELONA',
           summary: 'An invite-only urban map for discovering inspiring workspaces and meeting the right people in the real world.',
           cover: 'assets/images/software/medixi-shot-01.png',
-          coverPosition: 'center 72%',
+          coverFit: 'cover',
+          coverPosition: 'center 29%',
+          coverBg: '#090a0e',
           galleryLayout: 'portrait',
           gallery: [
             'assets/images/software/medixi-shot-01.png'
@@ -258,11 +317,16 @@ window.AZ_CONFIG = {
         },
         {
           id: 'matinium',
+          zone: 'digital',
           title: 'Matinium',
           meta: 'DAILY RITUAL · WELLNESS',
           summary: 'Start your morning with clarity and close your night in silence — a calm daily ritual app free of streaks and noise.',
           cover: 'assets/images/software/matinium-cover.png',
-          coverPosition: 'center center',
+          coverFit: 'contain',
+          coverBg: '#090a0e',
+          hoverCover: 'assets/images/software/matinium-slide-02.png',
+          hoverFit: 'contain',
+          hoverBg: '#FAF9F5',
           galleryLayout: 'landscape',
           gallery: [
             'assets/images/software/matinium-hero.png',
@@ -279,11 +343,18 @@ window.AZ_CONFIG = {
         },
         {
           id: 'menir',
+          zone: 'digital',
           title: 'Menir',
           meta: 'FOCUS · APP BLOCKER',
           summary: 'Break mindless scrolling in seconds — solve three quick mental math challenges before opening distracting apps.',
           cover: 'assets/images/software/menir-01-dashboard.png',
-          coverPosition: 'center 58%',
+          coverFit: 'cover',
+          coverPosition: 'center 24%',
+          coverBg: '#08090b',
+          hoverCover: 'assets/images/software/menir-02-reto.png',
+          hoverFit: 'cover',
+          hoverPosition: 'center 26%',
+          hoverBg: '#08090b',
           galleryLayout: 'portrait',
           gallery: [
             'assets/images/software/menir-01-dashboard.png',
@@ -300,11 +371,18 @@ window.AZ_CONFIG = {
         },
         {
           id: 'producty',
+          zone: 'digital',
           title: 'Producty',
           meta: 'DEEP FOCUS · EXECUTION',
           summary: 'Turn overwhelming goals into a 6-step action roadmap, lock into zero-distraction focus blocks and track every real minute.',
           cover: 'assets/images/software/producty-01-bunker.png',
-          coverPosition: 'center 88%',
+          coverFit: 'cover',
+          coverPosition: 'center 76%',
+          coverBg: '#050706',
+          hoverCover: 'assets/images/software/producty-03-compromiso.png',
+          hoverFit: 'cover',
+          hoverPosition: 'center 72%',
+          hoverBg: '#050706',
           galleryLayout: 'portrait',
           gallery: [
             'assets/images/software/producty-01-bunker.png',
@@ -325,11 +403,11 @@ window.AZ_CONFIG = {
 
     es: {
       nav: {
-        services: 'Servicios',
-        work: 'Proyectos',
+        work: 'Físico',
         lab: 'Software e IA',
+        services: 'Capacidades',
         process: 'Proceso',
-        contact: 'Contacto'
+        cta: 'Iniciar Proyecto'
       },
       hero: {
         eyebrow: 'ESTUDIO DE PRODUCTO FÍSICO Y DIGITAL · BARCELONA',
@@ -338,8 +416,32 @@ window.AZ_CONFIG = {
         ctaPrimary: 'Iniciar Proyecto',
         ctaSecondary: 'Ver Proyectos'
       },
+      kineticItems: [
+        'DISEÑO INDUSTRIAL Y CAD 3D',
+        'I+D EN BIOMATERIALES',
+        'PRODUCCIÓN EN MASA Y PROVEEDORES',
+        'DFM · CNC · CHAPA METÁLICA · MOLDES',
+        'APPS MÓVILES Y UX / UI',
+        'SISTEMAS DE IA APLICADA',
+        'SOLIDWORKS · RHINO 3D · SIEMENS NX',
+        'BARCELONA · ESTUDIO END-TO-END'
+      ],
+      work: {
+        eyebrow: '01 / PRODUCTOS FÍSICOS',
+        title: 'Diseño Industrial, I+D y Producción en Masa.',
+        desc: 'Innovación en biomateriales, iluminación paramétrica, ensamblajes mecánicos y fabricación en serie dirigida con talleres.',
+        featuredBadge: 'I+D DESTACADO · BIOMATERIALES',
+        featuredCta: 'Explorar Bolet Lamp',
+        viewProject: 'Ver proyecto'
+      },
+      lab: {
+        eyebrow: '02 / SOFTWARE, APPS E IA APLICADA',
+        title: 'Productos Digitales y Sistemas de IA.',
+        desc: 'Aplicaciones móviles propias y herramientas de IA diseñadas para resolver problemas reales con claridad y criterio.',
+        viewProject: 'Ver proyecto'
+      },
       services: {
-        eyebrow: '01 / CAPACIDADES',
+        eyebrow: '03 / CAPACIDADES',
         title: 'Un solo estudio del concepto a fábrica y lanzamiento.',
         desc: 'La mayoría de estudios se quedan en renders. Aquí diseñamos, hacemos ingeniería, lideramos proveedores para producir en serie y desarrollamos el software de tu producto.',
         cta: 'Cuéntanos tu Idea',
@@ -347,42 +449,26 @@ window.AZ_CONFIG = {
         pillars: [
           {
             id: 'design',
-            tabLabel: '01 · Diseño de Producto y CAD 3D',
-            index: 'CAPACIDAD 01 / 03',
+            num: '01',
             title: 'Diseño Industrial e Ingeniería Mecánica CAD',
             desc: 'Desde superficies orgánicas Clase A hasta ensamblajes electromecánicos complejos listos para fabricar. Modelos 3D, planos de despiece y soldadura, tolerancias y BOM.',
-            glow: 'radial-gradient(circle at 70% 35%, rgba(217, 119, 6, 0.42), rgba(15, 15, 18, 0.9) 70%)',
             chips: ['SolidWorks', 'Rhino 3D y Grasshopper', 'Siemens NX', 'AutoCAD', 'Superficies Clase A', 'FEA / CFD', 'Planos y BOM']
           },
           {
             id: 'production',
-            tabLabel: '02 · Producción en Masa y Proveedores',
-            index: 'CAPACIDAD 02 / 03',
+            num: '02',
             title: 'Liderazgo de Producción en Serie y Proveedores',
             desc: '¿Necesitas fabricar a escala? Nos encargamos del DFM, búsqueda y negociación directa con proveedores (CNC, corte láser, chapa metálica, moldes, impresión 3D), control de calidad y entrega en serie.',
-            glow: 'radial-gradient(circle at 65% 40%, rgba(220, 38, 38, 0.36), rgba(15, 15, 18, 0.92) 70%)',
             chips: ['Optimización DFM', 'Trato con Proveedores', 'CNC y Corte Láser', 'Chapa Metálica', 'Moldes a Medida', 'Impresión 3D', 'Control de Calidad']
           },
           {
             id: 'software',
-            tabLabel: '03 · Software, Apps e IA Aplicada',
-            index: 'CAPACIDAD 03 / 03',
+            num: '03',
             title: 'Apps Móviles, Producto Digital e IA Aplicada',
             desc: 'Diseñamos y programamos aplicaciones móviles de alto rendimiento, plataformas web, automatización en Python y sistemas de agentes de IA orientados a operaciones reales.',
-            glow: 'radial-gradient(circle at 68% 35%, rgba(37, 99, 235, 0.42), rgba(15, 15, 18, 0.92) 70%)',
             chips: ['Flutter y Dart', 'iOS y Android', 'Supabase y SQL', 'UX / UI Figma', 'Automatización Python', 'Agentes de IA']
           }
         ]
-      },
-      work: {
-        eyebrow: '02 / HARDWARE Y PRODUCCIÓN EN MASA',
-        title: 'Producto Físico e Ingeniería de Producción.',
-        desc: 'Ensamblajes mecánicos listos para fábrica, liderazgo de producción en serie, I+D en biomateriales e iluminación paramétrica.'
-      },
-      lab: {
-        eyebrow: '03 / SOFTWARE, APPS E IA APLICADA',
-        title: 'Productos Digitales y Sistemas de IA.',
-        desc: 'Aplicaciones móviles propias y herramientas de IA diseñadas para resolver problemas reales con claridad y criterio.'
       },
       process: {
         eyebrow: '04 / CÓMO TRABAJAMOS',
@@ -395,6 +481,7 @@ window.AZ_CONFIG = {
         ]
       },
       mystery: {
+        eyebrow: 'NUEVO PROYECTO',
         title: '¿Tu Próximo Producto?',
         desc: 'Producto físico, producción en masa o una app — trae la idea.',
         cta: 'Iniciar Proyecto'
@@ -404,14 +491,12 @@ window.AZ_CONFIG = {
         headline: '¿Tienes un producto, una fabricación o una app en mente?',
         cta: 'Iniciar Proyecto',
         contactLabel: 'DIRECTO',
-        socialLabel: 'ESTUDIO',
+        socialLabel: 'CANALES',
         legalLabel: 'LEGAL',
+        entityLabel: 'ENTIDAD',
         legalNotice: 'Aviso Legal',
         privacy: 'Privacidad',
         cookies: 'Cookies'
-      },
-      floating: {
-        cta: 'Iniciar Proyecto'
       },
       modal: {
         buildSimilar: 'Crear algo similar',
@@ -441,11 +526,55 @@ window.AZ_CONFIG = {
       },
       hardwareProjects: [
         {
+          id: 'bolet-lamp',
+          zone: 'physical',
+          featured: true,
+          title: 'Bolet Lamp',
+          meta: 'I+D BIOMATERIALES · PAÍSES BAJOS',
+          summary: 'Lámpara circular de micelio cultivada en moldes impresos en 3D a medida, con sensor táctil sin contacto por proximidad y encastres snap-fit con desacoplo térmico.',
+          featuredTags: ['Biomaterial de Micelio', 'Sensor sin Contacto', 'I+D Circular'],
+          cover: 'assets/images/design/bolet-lamp.jpg',
+          coverPosition: 'center 72%',
+          gallery: [
+            'assets/images/design/bolet-lamp.jpg'
+          ],
+          description: 'Lámpara arquitectónica 100% biodegradable desarrollada en un proyecto internacional de I+D en Países Bajos. Cultivada en micelio orgánico dentro de moldes diseñados e impresos en 3D a medida para regular densidad y difusión lumínica, con sensor de proximidad sin contacto, encastres snap-fit y desacoplo térmico LED.',
+          tags: ['Biomaterial de Micelio', 'Sensor sin Contacto', 'Moldes 3D', 'I+D Circular', 'Snap-Fit DFM'],
+          highlights: [
+            { title: 'Cultivo en Micelio y Utillaje', text: 'Moldes impresos en 3D a medida para controlar la densidad orgánica del micelio y la calidez lumínica.' },
+            { title: 'Interacción sin Contacto', text: 'Sensor superior de proximidad integrado que permite encender y regular la luz pasando la mano sin tocar el material.' },
+            { title: 'I+D Completo', text: 'Prototipo circular funcional entregado en 6 meses liderando un equipo multidisciplinar en Países Bajos.' }
+          ]
+        },
+        {
+          id: 'firestone-lamp',
+          zone: 'physical',
+          title: 'Firestone Lamp',
+          meta: 'ILUMINACIÓN PARAMÉTRICA · 3D',
+          summary: 'Superficies orgánicas paramétricas Clase A (continuidad G2) fabricadas mediante impresión 3D digital.',
+          cover: 'assets/images/slides/design-lamp.webp',
+          coverPosition: 'center 58%',
+          gallery: [
+            'assets/images/slides/design-lamp.webp',
+            'assets/images/design/firestone.png'
+          ],
+          description: 'Lámpara decorativa paramétrica propia de A-Z DISSENY, SL. Geometría orgánica con continuidad de superficies Clase A fabricada directamente mediante manufactura aditiva FDM.',
+          tags: ['Rhino 3D', 'Grasshopper', 'Superficies Clase A', 'Impresión 3D FDM', 'Iluminación'],
+          highlights: [
+            { title: 'Superficie Paramétrica', text: 'Geometría orgánica G2 diseñada para una difusión de luz continua.' },
+            { title: 'Fabricación Propia', text: 'Producción digital directa sin necesidad de moldes de inyección costosos.' }
+          ]
+        },
+        {
           id: 'naval',
+          zone: 'physical',
           title: 'Sistemas Electromecánicos Navales',
           meta: 'PRODUCCIÓN EN SERIE · +60 BARCOS · BAJO NDA',
           summary: 'Sistemas electromecánicos interiores, chapistería marina 5083, gestión de proveedores y producción en serie para +60 barcos. Imágenes representativas (reales protegidas por NDA).',
           cover: 'assets/images/design/naval-vessel-nda.jpg',
+          coverPosition: '60% center',
+          hoverCover: 'assets/images/design/naval-battery-bay-nda.jpg',
+          hoverPosition: 'center center',
           gallery: [
             'assets/images/design/naval-vessel-nda.jpg',
             'assets/images/design/naval-bridge-nda.jpg',
@@ -462,10 +591,14 @@ window.AZ_CONFIG = {
         },
         {
           id: 'smart-heater',
+          zone: 'physical',
           title: 'Smart Water Heater',
           meta: 'CAD · FEA / CFD · UX',
           summary: 'Optimización térmica, arquitectura mecánica explosionada en CAD y unidad de control centrada en el usuario.',
           cover: 'assets/images/design/heater-exploded.png',
+          coverPosition: 'center center',
+          hoverCover: 'assets/images/design/heater-control.png',
+          hoverPosition: 'center center',
           gallery: [
             'assets/images/design/heater-exploded.png',
             'assets/images/design/heater-control.png',
@@ -478,48 +611,21 @@ window.AZ_CONFIG = {
             { title: 'Arquitectura Mecánica', text: 'Ensamblaje interno modular pensado para mantenimiento y fabricabilidad.' },
             { title: 'Simulación', text: 'Validación CFD de flujo helicoidal y FEA del rotor antes de prototipar.' }
           ]
-        },
-        {
-          id: 'bolet-lamp',
-          title: 'Bolet Lamp',
-          meta: 'I+D BIOMATERIALES · PAÍSES BAJOS',
-          summary: 'Lámpara circular de micelio orgánico con moldes impresos en 3D y encastres snap-fit con desacoplo térmico.',
-          cover: 'assets/images/design/bolet-lamp.jpg',
-          gallery: [
-            'assets/images/design/bolet-lamp.jpg'
-          ],
-          description: 'Lámpara funcional 100% biodegradable desarrollada en un proyecto internacional de I+D en Países Bajos. Moldes diseñados e impresos en 3D a medida para controlar la densidad del micelio y la difusión lumínica.',
-          tags: ['Biomateriales', 'Moldes 3D', 'Liderazgo I+D', 'Snap-Fit DFM', 'Iluminación'],
-          highlights: [
-            { title: 'Utillaje Propio', text: 'Moldes impresos en 3D diseñados para regular crecimiento orgánico y luz.' },
-            { title: 'I+D Completo', text: 'Prototipo funcional entregado en 6 meses coordinando un equipo multidisciplinar.' }
-          ]
-        },
-        {
-          id: 'firestone-lamp',
-          title: 'Firestone Lamp',
-          meta: 'ILUMINACIÓN PARAMÉTRICA · 3D',
-          summary: 'Superficies orgánicas paramétricas Clase A (continuidad G2) fabricadas mediante impresión 3D digital.',
-          cover: 'assets/images/design/firestone.png',
-          gallery: [
-            'assets/images/design/firestone.png',
-            'assets/images/slides/design-lamp.webp'
-          ],
-          description: 'Lámpara decorativa paramétrica propia de A-Z DISSENY, SL. Geometría orgánica con continuidad de superficies Clase A fabricada directamente mediante manufactura aditiva FDM.',
-          tags: ['Rhino 3D', 'Grasshopper', 'Superficies Clase A', 'Impresión 3D FDM', 'Iluminación'],
-          highlights: [
-            { title: 'Superficie Paramétrica', text: 'Geometría orgánica G2 diseñada para una difusión de luz continua.' },
-            { title: 'Fabricación Propia', text: 'Producción digital directa sin necesidad de moldes de inyección costosos.' }
-          ]
         }
       ],
       softwareProjects: [
         {
           id: 'prometeos',
+          zone: 'digital',
           title: 'prometeOS',
           meta: 'IA APLICADA · SISTEMA OPERATIVO',
           summary: 'Sistema operativo de IA que ordena el trabajo entre departamentos, mantiene cada proyecto bajo control y funciona ligero en local.',
           cover: 'assets/images/software/prometeos-organigrama.png',
+          coverFit: 'contain',
+          coverBg: '#09090d',
+          hoverCover: 'assets/images/software/prometeos-cadena.png',
+          hoverFit: 'contain',
+          hoverBg: '#09090d',
           galleryLayout: 'landscape',
           gallery: [
             'assets/images/software/prometeos-organigrama.png',
@@ -535,11 +641,14 @@ window.AZ_CONFIG = {
         },
         {
           id: 'medixi',
+          zone: 'digital',
           title: 'mediXI',
           meta: 'BETA PRIVADA · BARCELONA',
           summary: 'Mapa urbano privado para descubrir espacios con criterio y conectar con personas afines en el mundo real.',
           cover: 'assets/images/software/medixi-shot-01.png',
-          coverPosition: 'center 72%',
+          coverFit: 'cover',
+          coverPosition: 'center 29%',
+          coverBg: '#090a0e',
           galleryLayout: 'portrait',
           gallery: [
             'assets/images/software/medixi-shot-01.png'
@@ -553,11 +662,16 @@ window.AZ_CONFIG = {
         },
         {
           id: 'matinium',
+          zone: 'digital',
           title: 'Matinium',
           meta: 'RITUAL DIARIO · BIENESTAR',
           summary: 'Empieza el día con claridad y ciérralo en silencio — una app serena de hábitos diarios sin rachas ni ruido.',
           cover: 'assets/images/software/matinium-cover.png',
-          coverPosition: 'center center',
+          coverFit: 'contain',
+          coverBg: '#090a0e',
+          hoverCover: 'assets/images/software/matinium-slide-02.png',
+          hoverFit: 'contain',
+          hoverBg: '#FAF9F5',
           galleryLayout: 'landscape',
           gallery: [
             'assets/images/software/matinium-hero.png',
@@ -574,11 +688,18 @@ window.AZ_CONFIG = {
         },
         {
           id: 'menir',
+          zone: 'digital',
           title: 'Menir',
           meta: 'ENFOQUE · BLOQUEADOR DE APPS',
           summary: 'Frena el scroll automático al instante — resuelve tres micro-retos mentales antes de abrir tus apps más adictivas.',
           cover: 'assets/images/software/menir-01-dashboard.png',
-          coverPosition: 'center 58%',
+          coverFit: 'cover',
+          coverPosition: 'center 24%',
+          coverBg: '#08090b',
+          hoverCover: 'assets/images/software/menir-02-reto.png',
+          hoverFit: 'cover',
+          hoverPosition: 'center 26%',
+          hoverBg: '#08090b',
           galleryLayout: 'portrait',
           gallery: [
             'assets/images/software/menir-01-dashboard.png',
@@ -595,11 +716,18 @@ window.AZ_CONFIG = {
         },
         {
           id: 'producty',
+          zone: 'digital',
           title: 'Producty',
           meta: 'ENFOQUE PROFUNDO · EJECUCIÓN',
           summary: 'Convierte grandes objetivos en 6 fases ejecutables, bloquea distracciones en modo enfoque y mide cada minuto real.',
           cover: 'assets/images/software/producty-01-bunker.png',
-          coverPosition: 'center 88%',
+          coverFit: 'cover',
+          coverPosition: 'center 76%',
+          coverBg: '#050706',
+          hoverCover: 'assets/images/software/producty-03-compromiso.png',
+          hoverFit: 'cover',
+          hoverPosition: 'center 72%',
+          hoverBg: '#050706',
           galleryLayout: 'portrait',
           gallery: [
             'assets/images/software/producty-01-bunker.png',
